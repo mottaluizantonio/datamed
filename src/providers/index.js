@@ -1,9 +1,12 @@
 import { LoginProvider } from "./Login";
+import { ModalProvider } from "./Modal";
 import { TokenProvider } from "./Token";
 export const Providers = ({ children }) => {
     return (
         <TokenProvider>
-            <LoginProvider>{children}</LoginProvider>
+            <ModalProvider>
+                <LoginProvider>{children}</LoginProvider>
+            </ModalProvider>
         </TokenProvider>
     );
 };

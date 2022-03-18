@@ -197,7 +197,7 @@ export const Button = styled.button`
     width: ${(prop) => (!!prop?.width ? prop.width : !!prop?.style?.width ? prop.style.width : !!prop?.fullWidth ? "100%" : "auto")};
     height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "48px")};
     background-color: ${(prop) => colorManager("background", prop.bgColor || palette.presets.button)};
-    color: #ffffff;
+    color: ${(prop) => colorManager("color", prop.bgColor || palette.presets.button)};
     border: 1.2px solid ${(prop) => colorManager("background", prop.bgColor || palette.presets.button)};
     padding: ${(prop) => (!!prop?.style ? (prop.style?.padding ? prop.style.padding : "0px") : "11px 22px")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};

@@ -14,6 +14,7 @@ export const palette = {
     grey2: "#343B41",
     grey1: "#868E96",
     grey0: "#F8F9FA",
+    fadde: "rgb(52, 59, 65, 0.5)",
     presets: {
         container: "green1",
         header: "green1",
@@ -28,9 +29,9 @@ export const palette = {
         option: "grey1",
         button: "primary",
         focus: "green1",
-        modal: "grey0",
+        modal: "fadde",
         font: "grey0",
-        label: "primary",
+        label: "info",
     },
 };
 
@@ -43,7 +44,7 @@ export const colorManager = (retorno, color) => {
             type.disable = palette["grey1"];
             type.disableHover = palette["grey2"];
             type.focus = palette["primary"];
-            type.color = palette["primary"];
+            type.color = palette["grey0"];
             return type[retorno];
         }
         case "negative": {
@@ -52,7 +53,7 @@ export const colorManager = (retorno, color) => {
             type.disable = palette["grey1"];
             type.disableHover = palette["grey1"];
             type.focus = palette["negative"];
-            type.color = palette["negative"];
+            type.color = palette["grey0"];
             return type[retorno];
         }
         default: {
