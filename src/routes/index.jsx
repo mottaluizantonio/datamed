@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useLogin } from "../providers/Login";
 import { toast } from "react-toastify";
-
 export const Routes = () => {
     const { validarLogin } = useLogin();
     const history = useHistory();
