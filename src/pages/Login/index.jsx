@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Container, FieldBox, Button, FormBox, Content, RowBox, ColumnBox, Title, Text, Header } from "../../styles/theme";
 import imgLogin from "../../img/imgLogin.svg";
 import logo from "../../img/logo.svg";
+
 export const Login = ({ logar }) => {
     const history = useHistory();
     const { register, handleSubmit } = useForm();
