@@ -4,15 +4,27 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { Dashboard } from "../pages/Dashboard";
 import { Details } from "../pages/Details";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useLogin } from "../providers/Login";
+import { toast } from "react-toastify";
 
 export const Routes = () => {
+    const { validarLogin } = useLogin();
+    const history = useHistory();
+    const logar = async (dados = JSON.parse(localStorage.getItem("@datamed:login")) || {}) => {
+        let { id = 0, status, message } = await validarLogin(dados);
+        history.push(id > 0 && status ? `/dashboard/${id}` : "/");
+        if (!!dados?.password) status ? toast.success(message) : toast.error(message);
+    };
+    useEffect(() => logar(), []);
     return (
         <Switch>
             <Route exact path="/">
                 <Landingpage />
             </Route>
             <Route exact path="/login">
-                <Login />
+                <Login logar={logar} />
             </Route>
             <Route exact path="/register/:type">
                 <Register />
