@@ -1,7 +1,11 @@
 import {} from "./style";
-import { useBla } from "../../providers/Bla";
+import { Button } from "../../styles/theme";
+import { useLogin } from "../../providers/Login";
 export const Dashboard = () => {
-    const { bla, changeBla } = useBla();
-    changeBla(["BOOOAAAAAAAA!"]);
-    return <div>{bla}</div>;
+    const { logout } = useLogin();
+    return (
+        <div>
+            <Button onClick={() => logout("/")}>Logout</Button>
+        </div>
+    );
 };

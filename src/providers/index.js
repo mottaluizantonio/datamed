@@ -1,4 +1,9 @@
-import { ProviderBla } from "./Bla";
+import { LoginProvider } from "./Login";
+import { TokenProvider } from "./Token";
 export const Providers = ({ children }) => {
-    return <ProviderBla>{children}</ProviderBla>;
+    return (
+        <TokenProvider>
+            <LoginProvider>{children}</LoginProvider>
+        </TokenProvider>
+    );
 };

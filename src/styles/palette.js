@@ -1,25 +1,68 @@
-export const success = "#7fff57";
-export const error = "#ff577f";
-export const warning = "#ff8357";
-export const info = "#577fff";
-export const primary = "#FF577F";
-export const primaryFocus = "#FF427F";
-export const negative = "#59323F";
-export const Grey4 = "#121214";
-export const Grey3 = "#212529";
-export const Grey2 = "#343B41";
-export const Grey1 = "#868E96";
-export const Grey0 = "#F8F9FA";
+export const palette = {
+    success: "#64B982",
+    error: "#D46D6D",
+    warning: "#ff8357",
+    info: "#7BB7FB",
+    primary: "#7BB7FB",
+    primaryFocus: "#A1CDFF",
+    negative: "#D46D6D",
+    negativeFocus: "#EC8B8B",
+    green1: "#64B982",
+    ocean1: "#29C5DA",
+    grey4: "#121214",
+    grey3: "#212529",
+    grey2: "#343B41",
+    grey1: "#868E96",
+    grey0: "#F8F9FA",
+    presets: {
+        container: "green1",
+        header: "green1",
+        content: "green1",
+        ColumnBox: "transparent",
+        RowBox: "transparent",
+        form: "grey0",
+        FieldBox: "transparent",
+        input: "primary",
+        placeholder: "grey0",
+        select: "primary",
+        option: "grey1",
+        button: "primary",
+        focus: "green1",
+        modal: "grey0",
+        font: "grey0",
+        label: "primary",
+    },
+};
 
-/*  Testes com RGB =>
-    export const success = (alpha = 0) => `rgb(63, 232, 100, ${alpha})`;
-    export const error = (alpha = 0) => `rgb(232, 63, 91, ${alpha})`;
-    export const primary = (alpha = 0) => `rgb(255, 87, 127, ${alpha})`;
-    export const primaryFocus = (alpha = 0) => `rgb(255, 66, 127, ${alpha})`;
-    export const negative = (alpha = 0) => `rgb(89, 50, 63, ${alpha})`;
-    export const Grey4 = (alpha = 0) => `rgb(18, 18, 20, ${alpha})`;
-    export const Grey3 = (alpha = 0) => `rgb(33, 37, 41, ${alpha})`;
-    export const Grey2 = (alpha = 0) => `rgb(52, 59, 65, ${alpha})`;
-    export const Grey1 = (alpha = 0) => `rgb(134, 142, 150, ${alpha})`;
-    export const Grey0 = (alpha = 0) => `rgb(248, 249, 250, ${alpha})`;
-*/
+export const colorManager = (retorno, color) => {
+    let type = {};
+    switch (color) {
+        case "primary": {
+            type.background = palette["primary"];
+            type.hover = palette["primaryFocus"];
+            type.disable = palette["grey1"];
+            type.disableHover = palette["grey2"];
+            type.focus = palette["primary"];
+            type.color = palette["primary"];
+            return type[retorno];
+        }
+        case "negative": {
+            type.background = palette["negative"];
+            type.hover = palette["negativeFocus"];
+            type.disable = palette["grey1"];
+            type.disableHover = palette["grey1"];
+            type.focus = palette["negative"];
+            type.color = palette["negative"];
+            return type[retorno];
+        }
+        default: {
+            type.background = palette[color];
+            type.hover = palette[color];
+            type.disable = palette[color];
+            type.disableHover = palette[color];
+            type.focus = palette[color];
+            type.color = palette[color];
+            return type[retorno];
+        }
+    }
+};
