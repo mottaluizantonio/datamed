@@ -1,42 +1,39 @@
 import { ModalConsulta } from "../../components/ModalConsulta";
+import { useDashboard } from "../../providers/Dashboard";
 import { useModal } from "../../providers/Modal";
 import { Datagrid } from "../../styles/Datagrid";
 import { Button, Container, Content, Header } from "../../styles/theme";
 
 export const Mock = () => {
     const { Switch } = useModal();
-    let colunas = [
+    const { pacientes, setMedico } = useDashboard();
+    setMedico(40);
+    const onClickTeste = (dadosLinha) => console.log(dadosLinha);
+    let gridColumns = [
         {
-            label: "Nome",
+            label: "Nome do Paciente",
             key: "nome",
+            type: "text",
             width: 100,
         },
         {
-            label: "Sobrenome",
-            key: "sobrenome",
+            label: "CPF do Paciente",
+            key: "cpf",
+            type: "text",
             width: 100,
         },
         {
-            label: "Data de Nascimento",
-            key: "idade",
+            label: "Nascimento do Paciente",
+            key: "data_nascimento",
+            type: "text",
             width: 100,
         },
-    ];
-    let dados = [
         {
-            nome: "Vinicius Rocha",
-            sobrenome: "Pereira",
-            idade: "23",
-        },
-        {
-            nome: "Luiz Augusto",
-            sobrenome: "Motta",
-            idade: "32",
-        },
-        {
-            nome: "Rafael Mendes Gomes",
-            sobrenome: "Ricciardi",
-            idade: "22",
+            label: "Ação",
+            type: "button",
+            onclick: onClickTeste,
+            key: "Detalhes",
+            width: 100,
         },
     ];
     return (
@@ -46,7 +43,16 @@ export const Mock = () => {
                     <Button onClick={() => Switch("ModalConsulta")}>MODAL</Button>
                 </Header>
                 <Content style={{ justifyContent: "center" }}>
-                    <Datagrid title="Usuarios" columns={colunas} data={dados} />
+                    <Datagrid
+                        title="Pacientes"
+                        columns={gridColumns}
+                        data={pacientes}
+                        options={{
+                            emptyMsg: "Nenhum paciente foi encontrado!",
+                            showTitle: true,
+                            showFilter: true,
+                        }}
+                    ></Datagrid>
                 </Content>
             </Container>
             <ModalConsulta />
