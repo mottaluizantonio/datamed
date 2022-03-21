@@ -8,7 +8,11 @@ export const ModalConsulta = () => {
             <ColumnBox bgColor="grey0" width="600px">
                 <RowBox bgColor="primary" style={rowBar}>
                     <Text>TITULO DO MODAL</Text>
-                    <Button bgColor="negative" style={button} onClick={() => Switch("ModalConsulta")}>
+                    <Button
+                        bgColor="negative"
+                        style={button}
+                        onClick={() => Switch("ModalConsulta")}
+                    >
                         x
                     </Button>
                 </RowBox>
