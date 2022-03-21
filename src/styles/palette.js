@@ -15,6 +15,7 @@ export const palette = {
     grey1: "#868E96",
     grey0: "#F8F9FA",
     fadde: "rgb(52, 59, 65, 0.5)",
+    null: "#F8F9FA",
     presets: {
         container: "green1",
         header: "green1",
@@ -32,6 +33,34 @@ export const palette = {
         modal: "fadde",
         font: "grey0",
         label: "info",
+        Grid: {
+            background: "green1",
+            border: "green1",
+            GridHead: {
+                background: "primary",
+                border: "primary",
+                HeadField: {
+                    background: "primary",
+                    border: "primary",
+                    label: "grey0",
+                    input: { background: "null", border: "null", placeholder: "grey1", focus: "grey1", font: "grey1" },
+                    select: { background: "null", border: "null", option: "grey1", focus: "grey1", font: "grey1" },
+                },
+            },
+            GridContent: {
+                background: "primary",
+                border: "grey1",
+                ContentLine: {
+                    background: "primary",
+                    border: "primary",
+                    LineField: {
+                        background: "null",
+                        border: "grey1",
+                        color: "grey1",
+                    },
+                },
+            },
+        },
     },
 };
 
@@ -45,6 +74,9 @@ export const colorManager = (retorno, color) => {
             type.disableHover = palette["grey2"];
             type.focus = palette["primary"];
             type.color = palette["grey0"];
+            type.option = palette["grey1"];
+            type.placeholder = palette["grey1"];
+            type.border = palette["primary"];
             return type[retorno];
         }
         case "negative": {
@@ -54,6 +86,9 @@ export const colorManager = (retorno, color) => {
             type.disableHover = palette["grey1"];
             type.focus = palette["negative"];
             type.color = palette["grey0"];
+            type.option = palette["grey1"];
+            type.placeholder = palette["grey1"];
+            type.border = palette["negative"];
             return type[retorno];
         }
         default: {
@@ -63,6 +98,9 @@ export const colorManager = (retorno, color) => {
             type.disableHover = palette[color];
             type.focus = palette[color];
             type.color = palette[color];
+            type.option = palette[color];
+            type.placeholder = palette[color];
+            type.border = palette[color];
             return type[retorno];
         }
     }
