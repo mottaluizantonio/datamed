@@ -18,6 +18,7 @@ import { container, rightSide } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import Input from "../../components/Input";
 
 export const Register = () => {
   const history = useHistory();
@@ -30,25 +31,31 @@ export const Register = () => {
     profissao: yup.string().required("Campo Obrigatório"),
     status_fumante: yup.string().required("Campo Obrigatório"),
     cpf: yup.string().required("Campo Obrigatório"),
-    crm: yup.string().required("Campo Obrigatório"),
-    password: yup
+    crm: yup
       .string()
       .required("Campo Obrigatório")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Mínimo 8 digitos, Necessário maiúscula, minúscula, Número e Caracter especial"
-      ),
+      .min(6, "Mínimo de 6 caracteres"),
+    password: yup.string().required("Campo Obrigatório"),
+    // .matches(
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+    //   "Mínimo 8 digitos, Necessário maiúscula, minúscula, Número e Caracter especial"
+    // ),
     confirmarSenha: yup
       .string()
-      .oneOf([yup.ref("password"), null], "Senhas diferentes")
+      .oneOf([yup.ref("password"), null], "As senhas não coincidem")
       .required("Campo Obrigatório"),
   });
 
   const {
     register,
-    // handleSubmit,
+    handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const novoUsuario = (registros) => {
+    console.log(registros);
+  };
+
   return (
     <Container style={container}>
       <Header>
@@ -60,68 +67,73 @@ export const Register = () => {
             <Title>Registre-se</Title>
             <Text>É rápido e fácil</Text>
           </ColumnBox>
-          <FormBox width="564px">
-            <FieldBox>
-              <label>E-mail</label>
-              <input
-                type="email"
-                placeholder="Seu email"
-                {...register("email")}
-              />
-            </FieldBox>
-            <FieldBox>
-              <label>Nome</label>
-              <input type="text" placeholder="Seu nome" {...register("nome")} />
-            </FieldBox>
-            <FieldBox>
-              <label>Nascimento</label>
+          <FormBox width="564px" onSubmit={handleSubmit(novoUsuario)}>
+            <Input
+              register={register}
+              name="email"
+              erroCor={!!errors?.email}
+              error={errors.email?.message}
+              label="Email"
+              placeholder="Seu Email"
+            />
+            <Input
+              register={register}
+              name="nome"
+              erroCor={!!errors?.nome}
+              error={errors.nome?.message}
+              label="Nome"
+              placeholder="Seu Nome"
+            />
+
+            <FieldBox error={!!errors?.data_nascimento}>
+              <label>Nascimento {errors.data_nascimento?.message}</label>
               <input type="date" {...register("data_nascimento")} />
             </FieldBox>
-            <FieldBox>
-              <label>Celular</label>
+            <FieldBox error={!!errors?.celular}>
+              <label>Celular {errors.celular?.message}</label>
               <input type="tel" placeholder="Número" {...register("celular")} />
             </FieldBox>
-            <FieldBox>
-              <label>Profissão</label>
+            <FieldBox error={!!errors?.profissao}>
+              <label>Profissão {errors.profissao?.message}</label>
               <input
                 type="text"
                 placeholder="Sua Profissão"
                 {...register("profissao")}
               />
             </FieldBox>
-            <FieldBox>
-              <label>Fumante</label>
+            <FieldBox error={!!errors?.status_fumante}>
+              <label>Fumante {errors.status_fumante?.message}</label>
               <select {...register("status_fumante")}>
                 <option>Não</option>
                 <option>Sim</option>
               </select>
             </FieldBox>
-            <FieldBox>
-              <label>CPF</label>
+            <FieldBox error={!!errors?.cpf}>
+              <label>CPF {errors.cpf?.message}</label>
               <input
                 type="text"
                 placeholder="Insira seu CPF"
                 {...register("cpf")}
               />
             </FieldBox>
-            <FieldBox>
-              <label>CRM</label>
+            <FieldBox error={!!errors?.crm}>
+              <label>CRM {errors.cpf?.message} </label>
               <input
                 type="text"
                 placeholder="Insira seu CRM"
                 {...register("crm")}
               />
             </FieldBox>
-            <FieldBox>
-              <label>Senha</label>
+            <FieldBox error={!!errors?.password}>
+              <label>Senha {errors.password?.message}</label>
               <input
                 type="passWord"
                 placeholder="Sua senha"
                 {...register("password")}
               />
             </FieldBox>
-            <FieldBox>
-              <label>Confirmar Senha</label>
+            <FieldBox error={!!errors?.confirmarSenha}>
+              <label>Confirmar Senha {errors.confirmarSenha?.message}</label>
               <input
                 type="password"
                 placeholder="Sua senha"
