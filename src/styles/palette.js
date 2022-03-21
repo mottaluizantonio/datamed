@@ -14,7 +14,7 @@ export const palette = {
     grey2: "#343B41",
     grey1: "#868E96",
     grey0: "#F8F9FA",
-    fadde: "rgb(52, 59, 65, 0.5)",
+    fadde: "rgb(52, 59, 65, 0.6)",
     null: "#F8F9FA",
     presets: {
         container: "green1",

@@ -1,6 +1,6 @@
 import { RowBox } from "../theme";
 import { Grid, HeadField, GridHead, GridContent, ContentLine, LineField, Text, Title } from "./style";
-export const Datagrid = ({ title = "Grid", columns = [], data = [], width = "100%" }) => {
+export const Datagrid = ({ title = "Title", columns = [], data = [], width = "100%" }) => {
     return (
         <Grid width={width}>
             <RowBox style={{ padding: "10px" }}>

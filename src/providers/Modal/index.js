@@ -4,7 +4,6 @@ export const ModalProvider = ({ children }) => {
     const [stateModalPaciente, setStateModalPaciente] = useState(true);
     const [stateModalHistoricoFamiliar, setModalHistStateModalHistoricoFamiliar] = useState(true);
     const [stateModalConsulta, setStateModalConsulta] = useState(true);
-    console.log("stateModalConsulta", stateModalConsulta);
     const Switch = (modal) => {
         switch (modal) {
             case "ModalPaciente": {

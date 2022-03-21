@@ -12,8 +12,8 @@ export const Mock = () => {
             width: 100,
         },
         {
-            label: "Sobrenome",
-            key: "sobrenome",
+            label: "Email",
+            key: "email",
             width: 100,
         },
         {
@@ -25,17 +25,17 @@ export const Mock = () => {
     let dados = [
         {
             nome: "Vinicius Rocha",
-            sobrenome: "Pereira",
+            email: "vini@vini.com",
             idade: "23",
         },
         {
             nome: "Luiz Augusto",
-            sobrenome: "Motta",
+            email: "luiz@luiz.com",
             idade: "32",
         },
         {
             nome: "Rafael Mendes Gomes",
-            sobrenome: "Ricciardi",
+            email: "rafael@rafael.com",
             idade: "22",
         },
     ];
@@ -43,7 +43,7 @@ export const Mock = () => {
         <>
             <Container>
                 <Header>
-                    <Button onClick={() => Switch("ModalConsulta")}>MODAL</Button>
+                    <Button onClick={() => Switch("ModalConsulta")}>Abrir Modal</Button>
                 </Header>
                 <Content style={{ justifyContent: "center" }}>
                     <Datagrid title="Usuarios" columns={colunas} data={dados} />

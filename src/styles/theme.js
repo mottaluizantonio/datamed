@@ -239,7 +239,7 @@ export const Text = styled.span`
 export const ModalBox = styled.section`
     width: ${(prop) => (!!prop?.width ? prop.width : !!prop?.style?.width ? prop.style.width : "100%")};
     height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "100%")};
-    padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
+    padding: ${({ style }) => (!!style?.padding ? style.padding : "0px")};
     color: ${colorManager("color", palette.presets.font)};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};

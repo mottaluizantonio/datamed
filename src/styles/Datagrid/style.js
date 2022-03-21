@@ -129,7 +129,7 @@ export const ContentLine = styled.div`
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "row")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "initial")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "initial")};
-    padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
+    padding: ${({ style }) => (!!style?.padding ? style.padding : "0px")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
     box-sizing: border-box;
     gap: ${({ style }) => (!!style?.gap ? style.gap : "25px")};

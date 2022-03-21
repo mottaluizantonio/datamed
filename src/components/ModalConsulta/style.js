@@ -3,7 +3,7 @@ export const button = {
     height: "30px",
 };
 export const rowBar = {
-    padding: "15px 21px",
+    padding: "15px 20px",
     justifyContent: "space-between",
     borderRadius: "4px 4px 0px 0px",
 };
