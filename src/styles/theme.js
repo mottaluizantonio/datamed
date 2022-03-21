@@ -138,7 +138,7 @@ export const FieldBox = styled.div`
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.FieldBox))};
     label {
         width: 100%;
-        height: 36%;
+        height: auto;
         font-size: 15px;
         display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
         box-sizing: border-box;
@@ -166,6 +166,28 @@ export const FieldBox = styled.div`
             outline: 1.2px solid ${(prop) => colorManager("focus", palette.presets.focus)};
         }
     }
+
+    textarea {
+        width: 100%;
+        height: 100%;
+        padding: 16px 10px;
+        font-size: 16px;
+        display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        box-sizing: border-box;
+        color: ${colorManager("color", palette.presets.font)};
+        box-sizing: border-box;
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        border: 1.2px solid ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.input))};
+        background-color: ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.input))};
+        ::placeholder {
+            color: ${colorManager("color", palette.presets.placeholder)};
+        }
+        :focus {
+            outline: 1.2px solid ${(prop) => colorManager("focus", palette.presets.focus)};
+        }
+    }
+
     select {
         width: 100%;
         height: 64%;
