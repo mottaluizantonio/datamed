@@ -32,7 +32,7 @@ export const Routes = () => {
             <Route exact path="/dashboard/:id">
                 <Dashboard />
             </Route>
-            <Route exact path="/datails">
+            <Route exact path="/details">
                 <Details />
             </Route>
             <Route exact path="/mock">
