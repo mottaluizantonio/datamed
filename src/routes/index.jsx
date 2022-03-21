@@ -24,7 +24,7 @@ export const Routes = () => {
                 <Landingpage />
             </Route>
             <Route exact path="/login">
-                <Login logar={logar} />
+                <Login />
             </Route>
             <Route exact path="/register/:type">
                 <Register />
