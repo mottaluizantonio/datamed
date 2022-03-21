@@ -8,13 +8,14 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useLogin } from "../providers/Login";
 import { toast } from "react-toastify";
+import { Mock } from "../pages/Mock";
 export const Routes = () => {
     const { validarLogin } = useLogin();
     const history = useHistory();
     const logar = async (dados = JSON.parse(localStorage.getItem("@datamed:login")) || {}) => {
-        let { id = 0, status, message } = await validarLogin(dados);
-        history.push(id > 0 && status ? `/dashboard/${id}` : "/");
-        if (!!dados?.password) status ? toast.success(message) : toast.error(message);
+        // let { id = 0, status, message } = await validarLogin(dados);
+        // history.push(id > 0 && status ? `/dashboard/${id}` : "/");
+        // if (!!dados?.password) status ? toast.success(message) : toast.error(message);
     };
     useEffect(() => logar(), []);
     return (
@@ -31,8 +32,11 @@ export const Routes = () => {
             <Route exact path="/dashboard/:id">
                 <Dashboard />
             </Route>
-            <Route exact path="/datails">
+            <Route exact path="/details">
                 <Details />
+            </Route>
+            <Route exact path="/mock">
+                <Mock />
             </Route>
         </Switch>
     );
