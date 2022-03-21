@@ -75,6 +75,7 @@ export const Register = () => {
               error={errors.email?.message}
               label="Email"
               placeholder="Seu Email"
+              type="email"
             />
             <Input
               register={register}
@@ -84,23 +85,34 @@ export const Register = () => {
               label="Nome"
               placeholder="Seu Nome"
             />
+            <Input
+              register={register}
+              name="data_nascimento"
+              erroCor={!!errors?.data_nascimento}
+              error={errors.data_nascimento?.message}
+              label="Nascimento"
+              type="date"
+            />
+            <Input
+              register={register}
+              name="celular"
+              erroCor={!!errors?.celular}
+              error={errors.celular?.message}
+              label="Celular"
+              placeholder="Seu Número"
+              type="tel"
+            />
 
-            <FieldBox error={!!errors?.data_nascimento}>
-              <label>Nascimento {errors.data_nascimento?.message}</label>
-              <input type="date" {...register("data_nascimento")} />
-            </FieldBox>
-            <FieldBox error={!!errors?.celular}>
-              <label>Celular {errors.celular?.message}</label>
-              <input type="tel" placeholder="Número" {...register("celular")} />
-            </FieldBox>
-            <FieldBox error={!!errors?.profissao}>
-              <label>Profissão {errors.profissao?.message}</label>
-              <input
-                type="text"
-                placeholder="Sua Profissão"
-                {...register("profissao")}
-              />
-            </FieldBox>
+            <Input
+              register={register}
+              name="profissão"
+              erroCor={!!errors?.profissao}
+              error={errors.profissao?.message}
+              label="Profissão"
+              placeholder="Sua Profissão"
+              type="text"
+            />
+
             <FieldBox error={!!errors?.status_fumante}>
               <label>Fumante {errors.status_fumante?.message}</label>
               <select {...register("status_fumante")}>
@@ -108,38 +120,44 @@ export const Register = () => {
                 <option>Sim</option>
               </select>
             </FieldBox>
-            <FieldBox error={!!errors?.cpf}>
-              <label>CPF {errors.cpf?.message}</label>
-              <input
-                type="text"
-                placeholder="Insira seu CPF"
-                {...register("cpf")}
-              />
-            </FieldBox>
-            <FieldBox error={!!errors?.crm}>
-              <label>CRM {errors.cpf?.message} </label>
-              <input
-                type="text"
-                placeholder="Insira seu CRM"
-                {...register("crm")}
-              />
-            </FieldBox>
-            <FieldBox error={!!errors?.password}>
-              <label>Senha {errors.password?.message}</label>
-              <input
-                type="passWord"
-                placeholder="Sua senha"
-                {...register("password")}
-              />
-            </FieldBox>
-            <FieldBox error={!!errors?.confirmarSenha}>
-              <label>Confirmar Senha {errors.confirmarSenha?.message}</label>
-              <input
-                type="password"
-                placeholder="Sua senha"
-                {...register("confirmarSenha")}
-              />
-            </FieldBox>
+
+            <Input
+              register={register}
+              name="cpf"
+              erroCor={!!errors?.cpf}
+              error={errors.cpf?.message}
+              label="CPF"
+              placeholder="Insira seu CPF"
+              type="number"
+            />
+
+            <Input
+              register={register}
+              name="crm"
+              erroCor={!!errors?.crm}
+              error={errors.crm?.message}
+              label="CRM"
+              placeholder="Insira seu CRM"
+              type="number"
+            />
+            <Input
+              register={register}
+              name="password"
+              erroCor={!!errors?.password}
+              error={errors.password?.message}
+              label="Senha"
+              placeholder="Sua Senha"
+              type="passWord"
+            />
+            <Input
+              register={register}
+              name="confirmarSenha"
+              erroCor={!!errors?.confirmarSenha}
+              error={errors.confirmarSenha?.message}
+              label="Confirmar Senha"
+              placeholder="Insira a mesma senha"
+              type="passWord"
+            />
             <RowBox>
               <Button type="submit">Registre-se</Button>
               <Button onClick={() => history.push("/")}>Voltar</Button>
