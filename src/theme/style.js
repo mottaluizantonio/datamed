@@ -27,7 +27,7 @@ export const palette = {
         input: "primary",
         placeholder: "grey0",
         select: "primary",
-        option: "grey1",
+        option: "grey0",
         button: "primary",
         focus: "green1",
         modal: "fadde",

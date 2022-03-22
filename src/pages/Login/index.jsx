@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { container, rightSide } from "./style";
 import { useHistory } from "react-router-dom";
-import { Container, FieldBox, Button, FormBox, Content, RowBox, ColumnBox, Title, Text, Header } from "../../styles/theme";
+import { Container, FieldBox, Button, FormBox, Content, RowBox, ColumnBox, Title, Text, Header } from "../../theme";
 import imgLogin from "../../img/imgLogin.svg";
 import logo from "../../img/logo.svg";
 

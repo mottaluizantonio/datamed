@@ -1,12 +1,11 @@
-import { button, rowBar } from "./style";
-import { Button, ColumnBox, FieldBox, FormBox, ModalBox, RowBox, Text } from "../../styles/theme";
+import { rowBar } from "./style";
+import { Button, ColumnBox, FieldBox, FormBox, ModalBox, RowBox, Text } from "../../theme";
 import { useModal } from "../../providers/Modal";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDetails } from "../../providers/Details";
 import { toast } from "react-toastify";
-
 export const ModalConsulta = () => {
     const { salvarConsulta } = useDetails();
     const { Switch, stateModalConsulta } = useModal();
@@ -48,14 +47,7 @@ export const ModalConsulta = () => {
                     <FormBox width="100%" height="100%" onSubmit={handleSubmit(novaConsulta)}>
                         <FieldBox height="100%" error={!!errors?.desc_consulta}>
                             <label>Descrição da Consulta</label>
-                            <textarea
-                                {...register("desc_consulta")}
-                                placeholder={
-                                    !!errors?.desc_consulta
-                                        ? errors.desc_consulta.message
-                                        : "Descreva a consulta!"
-                                }
-                            ></textarea>
+                            <textarea {...register("desc_consulta")} placeholder={!!errors?.desc_consulta ? errors.desc_consulta.message : "Descreva a consulta!"}></textarea>
                         </FieldBox>
                         <RowBox>
                             <Button width="50%" type="submit">
