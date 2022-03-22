@@ -302,55 +302,70 @@ export const FieldBox = styled.div`
     border-radius: ${({ style }) =>
       !!style?.borderRadius ? style.borderRadius : "12px"};
     box-sizing: border-box;
-    color: ${colorManager("color", palette.presets.font)};
-    box-sizing: border-box;
-    border-radius: ${({ style }) =>
-      !!style?.borderRadius ? style.borderRadius : "12px"};
-    border: 1.2px solid
-      ${(prop) =>
-        prop?.error
-          ? palette.error
-          : colorManager("background", palette.presets.input)};
-    background-color: ${(prop) =>
-      prop?.error
-        ? palette.error
-        : colorManager("background", palette.presets.input)};
-    ::placeholder {
-      color: ${colorManager("color", palette.presets.placeholder)};
+    gap: ${({ style }) => (!!style?.gap ? style.gap : "10px")};
+    padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
+    cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "auto")};
+    background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.FieldBox))};
+    label {
+        width: 100%;
+        height: auto;
+        font-size: 15px;
+        display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
+        box-sizing: border-box;
+        color: ${colorManager("color", palette.presets.label)};
+        font-weight: 500;
+        padding-left: 10px;
     }
     :focus {
       outline: 1.2px solid
         ${(prop) => colorManager("focus", palette.presets.focus)};
     }
-  }
-  select {
-    width: 100%;
-    height: 64%;
-    padding: 0 16px 0 16px;
-    font-size: 16px;
-    display: ${(prop) =>
-      !!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex"};
-    border-radius: ${({ style }) =>
-      !!style?.borderRadius ? style.borderRadius : "12px"};
-    box-sizing: border-box;
-    color: ${(prop) => (prop?.error ? palette.error : palette.presets.font)};
-    box-sizing: border-box;
-    border-radius: ${({ style }) =>
-      !!style?.borderRadius ? style.borderRadius : "12px"};
-    border: 1.2px solid
-      ${(prop) =>
-        prop?.error
-          ? palette.error
-          : colorManager("background", palette.presets.select)};
-    background-color: ${(prop) =>
-      prop?.error
-        ? palette.error
-        : colorManager("background", palette.presets.select)};
-    cursor: pointer;
-    option {
-      color: ${colorManager("color", palette.presets.option)};
-      font-size: 18px;
-      font-weight: 400;
+    textarea {
+        width: 100%;
+        height: 100%;
+        padding: 16px 10px;
+        font-size: 16px;
+        display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        box-sizing: border-box;
+        color: ${colorManager("color", palette.presets.font)};
+        box-sizing: border-box;
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        border: 1.2px solid ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.input))};
+        background-color: ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.input))};
+        ::placeholder {
+            color: ${colorManager("color", palette.presets.placeholder)};
+        }
+        :focus {
+            outline: 1.2px solid ${(prop) => colorManager("focus", palette.presets.focus)};
+        }
+    }
+
+    select {
+        width: 100%;
+        height: 64%;
+        padding: 0 16px 0 16px;
+        font-size: 16px;
+        display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        box-sizing: border-box;
+        color: ${(prop) => (prop?.error ? palette.error : palette.presets.font)};
+        box-sizing: border-box;
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        border: 1.2px solid ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.select))};
+        background-color: ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.select))};
+        cursor: pointer;
+        option {
+            color: ${colorManager("color", palette.presets.option)};
+            font-size: 18px;
+            font-weight: 400;
+        }
+        ::placeholder {
+            color: ${colorManager("color", palette.presets.placeholder)};
+        }
+        :focus {
+            outline: 1.2px solid ${(prop) => colorManager("focus", palette.presets.focus)};
+        }
     }
     ::placeholder {
       color: ${colorManager("color", palette.presets.placeholder)};
