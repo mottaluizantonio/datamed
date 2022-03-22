@@ -83,7 +83,11 @@ export const Register = () => {
             <Title>Registre-se</Title>
             <Text>É rápido e fácil</Text>
           </ColumnBox>
-          <FormBox width="564px" onSubmit={handleSubmit(novoUsuario)}>
+          <FormBox
+            style={{ overflow: "auto" }}
+            width="400px"
+            onSubmit={handleSubmit(novoUsuario)}
+          >
             <Input
               register={register}
               name="email"
@@ -99,72 +103,80 @@ export const Register = () => {
               label="Nome"
               placeholder="Seu Nome"
             />
-            <Input
-              register={register}
-              name="data_nascimento"
-              errorMsg={errors.data_nascimento?.message}
-              label="Nascimento"
-              type="date"
-            />
-            <Input
-              register={register}
-              name="celular"
-              errorMsg={errors.celular?.message}
-              label="Celular"
-              placeholder="Seu Número"
-              type="tel"
-            />
+            <RowBox>
+              <Input
+                register={register}
+                name="data_nascimento"
+                errorMsg={errors.data_nascimento?.message}
+                label="Nascimento"
+                type="date"
+              />
+              <Input
+                register={register}
+                name="celular"
+                errorMsg={errors.celular?.message}
+                label="Celular"
+                placeholder="Seu Número"
+                type="tel"
+              />
+            </RowBox>
+            <RowBox>
+              <Input
+                register={register}
+                name="profissao"
+                errorMsg={errors.profissao?.message}
+                label="Profissão"
+                placeholder="Sua Profissão"
+                type="text"
+              />
 
-            <Input
-              register={register}
-              name="profissao"
-              errorMsg={errors.profissao?.message}
-              label="Profissão"
-              placeholder="Sua Profissão"
-              type="text"
-            />
+              <FieldBox error={!!errors?.status_fumante}>
+                <label>Fumante {errors.status_fumante?.message}</label>
+                <select {...register("status_fumante")}>
+                  <option>Não</option>
+                  <option>Sim</option>
+                </select>
+              </FieldBox>
+            </RowBox>
 
-            <FieldBox error={!!errors?.status_fumante}>
-              <label>Fumante {errors.status_fumante?.message}</label>
-              <select {...register("status_fumante")}>
-                <option>Não</option>
-                <option>Sim</option>
-              </select>
-            </FieldBox>
+            <RowBox>
+              <Input
+                register={register}
+                name="cpf"
+                errorMsg={errors.cpf?.message}
+                label="CPF"
+                placeholder="Insira seu CPF"
+                type="number"
+              />
 
-            <Input
-              register={register}
-              name="cpf"
-              errorMsg={errors.cpf?.message}
-              label="CPF"
-              placeholder="Insira seu CPF"
-              type="number"
-            />
+              <Input
+                register={register}
+                name="crm"
+                errorMsg={errors.crm?.message}
+                label="CRM"
+                placeholder="Insira seu CRM"
+                type="number"
+              />
+            </RowBox>
 
-            <Input
-              register={register}
-              name="crm"
-              errorMsg={errors.crm?.message}
-              label="CRM"
-              placeholder="Insira seu CRM"
-              type="number"
-            />
-            <Input
-              register={register}
-              name="password"
-              errorMsg={errors.password?.message}
-              label="Senha"
-              placeholder="Sua Senha"
-              type="passWord"
-            />
-            <Input
-              register={register}
-              name="confirmarSenha"
-              errorMsg={errors.confirmarSenha?.message}
-              label="Confirmar Senha"
-              placeholder="Insira a mesma senha"
-              type="passWord"
-            />
+            <RowBox>
+              <Input
+                register={register}
+                name="password"
+                errorMsg={errors.password?.message}
+                label="Senha"
+                placeholder="Sua Senha"
+                type="passWord"
+              />
+              <Input
+                register={register}
+                name="confirmarSenha"
+                errorMsg={errors.confirmarSenha?.message}
+                label="Confirmar Senha"
+                placeholder="Insira a mesma senha"
+                type="passWord"
+              />
+            </RowBox>
             <RowBox>
               <Button type="submit">Registre-se</Button>
               <Button onClick={() => history.push("/")}>Voltar</Button>
