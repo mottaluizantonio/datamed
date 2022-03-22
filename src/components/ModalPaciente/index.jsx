@@ -14,6 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useRegister } from '../../providers/Register';
 import { toast } from 'react-toastify';
+import { palette } from '../../styles/palette';
 export const ModalPaciente = () => {
 	const { Switch, stateModalPaciente } = useModal();
 	const { cadastrarPaciente } = useRegister();
@@ -59,12 +60,15 @@ export const ModalPaciente = () => {
 						x
 					</Button>
 				</RowBox>
-				<FormBox onSubmit={handleSubmit(novoPaciente)}>
+				<FormBox
+					onSubmit={handleSubmit(novoPaciente)}
+					style={{ overflow: 'auto' }}>
 					<FieldBox>
 						<label>Nome</label>
 						<input
 							placeholder='Nome do paciente'
 							{...register('nome')}
+							type='text'
 						/>
 						{errors.nome?.message}
 					</FieldBox>
@@ -73,6 +77,7 @@ export const ModalPaciente = () => {
 						<input
 							placeholder='CPF do paciente'
 							{...register('cpf')}
+							type='number'
 						/>
 						{errors.cpf?.message}
 					</FieldBox>
@@ -81,6 +86,7 @@ export const ModalPaciente = () => {
 						<input
 							placeholder='Data de nascimento do paciente'
 							{...register('data_nascimento')}
+							type='date'
 						/>
 						{errors.data_nascimento?.message}
 					</FieldBox>
@@ -95,6 +101,7 @@ export const ModalPaciente = () => {
 					<FieldBox>
 						<label>Fumante</label>
 						<select
+						style={{color: palette.grey0}}
 							name='fumante'
 							id='fumante'
 							{...register('status_fumante')}>
@@ -108,6 +115,7 @@ export const ModalPaciente = () => {
 						<input
 							placeholder='E-mail do paciente'
 							{...register('email')}
+							type='email'
 						/>
 						{errors.email?.message}
 					</FieldBox>
@@ -117,6 +125,7 @@ export const ModalPaciente = () => {
 						<input
 							placeholder='Celular do paciente'
 							{...register('celular')}
+							type='tel'
 						/>
 						{errors.celular?.message}
 					</FieldBox>

@@ -5,3 +5,4 @@ export const HrComponent = styled.div`
 	height: '2px';
 	background-color: '#D8D8D8';
 `;
+
