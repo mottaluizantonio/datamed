@@ -451,7 +451,8 @@ export const Text = styled.span`
   font-weight: ${({ style }) =>
     !!style?.fontWeight ? style.fontWeight : "normal"};
   font-size: ${({ style }) => (!!style?.fontSize ? style.fontSize : "18px")};
-  color: ${colorManager("color", palette.presets.font)};
+  color: ${(prop) =>
+    colorManager("color", !!prop?.color ? prop.color : palette.presets.font)};
   cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
 `;
 
