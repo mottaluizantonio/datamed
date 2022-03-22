@@ -1,13 +1,11 @@
 import { ModalConsulta } from "../../components/ModalConsulta";
-import { useDashboard } from "../../providers/Dashboard";
 import { useModal } from "../../providers/Modal";
 import { Datagrid } from "../../styles/Datagrid";
 import { Button, Container, Content, Header } from "../../styles/theme";
 
 export const Mock = () => {
     const { Switch } = useModal();
-    const { pacientes, setMedico } = useDashboard();
-    setMedico(40);
+
     const onClickTeste = (dadosLinha) => console.log(dadosLinha);
     let gridColumns = [
         {
@@ -46,7 +44,7 @@ export const Mock = () => {
                     <Datagrid
                         title="Pacientes"
                         columns={gridColumns}
-                        data={pacientes}
+                        data={[]}
                         options={{
                             emptyMsg: "Nenhum paciente foi encontrado!",
                             showTitle: true,
