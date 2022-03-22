@@ -19,6 +19,7 @@ import { useHistory } from "react-router-dom";
 import { useLogin } from "../../providers/Login";
 import { Datagrid } from "../../styles/Datagrid";
 import { useModal } from "../../providers/Modal";
+import { ModalDetalhesConsulta } from "../../components/ModalDetalhesConsulta";
 
 export const Details = () => {
   const { cpf } = useParams();
@@ -32,7 +33,15 @@ export const Details = () => {
     { label: "Descrição", key: "descricao", width: 100 },
   ];
 
-  const colunasConsultas = [{ label: "", key: "desc" }];
+  const detalhesConsulta = (dado) => {
+    Switch("ModalDetalhesConsulta");
+    // passar o dado.id para o estate que vai pegar os diagnósticos da consulta
+  };
+
+  const colunasConsultas = [
+    { key: "desc" },
+    { key: "Detalhes", type: "button", onclick: detalhesConsulta },
+  ];
 
   const calculate_age = ({ data_nascimento = "01/01/1900" }) => {
     const data_nasc = data_nascimento.split("/");
@@ -117,6 +126,7 @@ export const Details = () => {
         </Content>
       </Container>
       <ModalConsulta></ModalConsulta>
+      <ModalDetalhesConsulta></ModalDetalhesConsulta>
     </>
   );
 };
