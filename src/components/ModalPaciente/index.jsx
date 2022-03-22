@@ -101,7 +101,7 @@ export const ModalPaciente = () => {
 					<FieldBox>
 						<label>Fumante</label>
 						<select
-						style={{color: palette.grey0}}
+							style={{ color: palette.grey0 }}
 							name='fumante'
 							id='fumante'
 							{...register('status_fumante')}>
