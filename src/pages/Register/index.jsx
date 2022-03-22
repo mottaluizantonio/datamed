@@ -41,11 +41,13 @@ export const Register = () => {
       .string()
       .required("Campo Obrigatório")
       .min(6, "Mínimo de 6 dígitos"),
-    password: yup.string().required("Campo Obrigatório"),
-    // .matches(
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    //   "Mínimo 8 digitos, Necessário maiúscula, minúscula, Número e Caracter especial"
-    // ),
+    password: yup
+      .string()
+      .required("Campo Obrigatório")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Mínimo 8 digitos, Necessário maiúscula, minúscula, Número e Caracter especial"
+      ),
     confirmarSenha: yup
       .string()
       .oneOf([yup.ref("password"), null], "As senhas não coincidem")
