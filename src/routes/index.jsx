@@ -1,14 +1,14 @@
-import { Route, Switch } from "react-router-dom";
-import { Landingpage } from "../pages/Landingpage";
-import { Login } from "../pages/Login";
-import { Register } from "../pages/Register";
-import { Dashboard } from "../pages/Dashboard";
-import { Details } from "../pages/Details";
-import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { useLogin } from "../providers/Login";
-import { toast } from "react-toastify";
-import { Mock } from "../pages/Mock";
+import { Route, Switch } from 'react-router-dom';
+import { Landingpage } from '../pages/Landingpage';
+import { Login } from '../pages/Login';
+import { Register } from '../pages/Register';
+import { Dashboard } from '../pages/Dashboard';
+import { Details } from '../pages/Details';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useLogin } from '../providers/Login';
+import { toast } from 'react-toastify';
+import { Mock } from '../pages/Mock';
 export const Routes = () => {
   const { validarLogin } = useLogin();
   const history = useHistory();
@@ -42,4 +42,5 @@ export const Routes = () => {
       </Route>
     </Switch>
   );
+
 };
