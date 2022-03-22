@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const DetailsContext = createContext();
 
@@ -6,7 +6,9 @@ export const DetailsProvider = ({ children }) => {
   const [consultas, setConsultas] = useState([]);
   const [diagnosticos, setDiagnosticos] = useState([]);
   const [historicoFamiliar, setHistoricoFamiliar] = useState([]);
-  const [paciente, setPaciente] = useState([]);
+  const [Paciente, setPaciente] = useState("confusao");
+
+  useEffect(() => getDadosPaciente(), [Paciente]);
 
   const selectPaciente = (cpf = undefined) => {
     //Mock abaixo
@@ -24,14 +26,12 @@ export const DetailsProvider = ({ children }) => {
       id: 2,
     };
     //Mock acima
-    // setPaciente(pacienteSelecionado);
-    // console.log("pacienteSelecionado", pacienteSelecionado);
-    return pacienteSelecionado;
+    setPaciente(pacienteSelecionado);
   };
 
   const getDadosPaciente = () => {
     //Mocks abaixo
-    let listaDiagnosticos = !!paciente?.id
+    let listaDiagnosticos = !!Paciente?.id
       ? [
           {
             id: 1,
@@ -53,7 +53,7 @@ export const DetailsProvider = ({ children }) => {
           },
         ]
       : [];
-    let listaHistoricoFamiliar = !!paciente?.id
+    let listaHistoricoFamiliar = !!Paciente?.id
       ? [
           {
             id: 1,
@@ -73,7 +73,7 @@ export const DetailsProvider = ({ children }) => {
           },
         ]
       : [];
-    let listaConsultas = !!paciente?.id
+    let listaConsultas = !!Paciente?.id
       ? [
           {
             id: 1,
@@ -95,7 +95,7 @@ export const DetailsProvider = ({ children }) => {
 
   return (
     <DetailsContext.Provider
-      value={{ paciente, setPaciente, selectPaciente, getDadosPaciente }}
+      value={{ Paciente, selectPaciente, diagnosticos, consultas }}
     >
       {children}
     </DetailsContext.Provider>
