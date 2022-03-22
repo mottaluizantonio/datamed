@@ -21,6 +21,7 @@ import * as yup from "yup";
 import { Input } from "../../styles/Input";
 import { useRegister } from "../../providers/Register";
 import { toast } from "react-toastify";
+import { Select } from "../../styles/Select";
 
 export const Register = () => {
   const history = useHistory();
@@ -129,14 +130,13 @@ export const Register = () => {
                 placeholder="Sua Profissão"
                 type="text"
               />
-
-              <FieldBox error={!!errors?.status_fumante}>
-                <label>Fumante {errors.status_fumante?.message}</label>
-                <select {...register("status_fumante")}>
-                  <option>Não</option>
-                  <option>Sim</option>
-                </select>
-              </FieldBox>
+              <Select
+                label="Fumante"
+                register={register}
+                name="status_fumante"
+                option1="Não"
+                option2="Sim"
+              />
             </RowBox>
 
             <RowBox>
