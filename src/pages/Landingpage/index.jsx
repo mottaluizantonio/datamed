@@ -3,8 +3,13 @@ import { container, rightSide, boxLogo } from "./style";
 import logo from "../../img/logo.svg";
 import imgLandingpage from "../../img/imgLandingpage.svg";
 import { useHistory } from "react-router-dom";
+import { useLogin } from "../../providers/Login";
+import { useEffect } from "react";
 export const Landingpage = () => {
+    const { setFirstAccess } = useLogin();
     const history = useHistory();
+    useEffect(() => setFirstAccess(0), []);
+    const goTo = (path) => history.push(path);
     return (
         <Container style={container}>
             <ColumnBox style={{ gap: "150px" }}>
@@ -13,10 +18,10 @@ export const Landingpage = () => {
                     <Text>Seu paciente em um click!</Text>
                 </ColumnBox>
                 <RowBox>
-                    <Button width="150px" onClick={() => history.push("/login")}>
+                    <Button width="150px" onClick={() => goTo("/login")}>
                         Login
                     </Button>
-                    <Button width="150px" onClick={() => history.push("/register/:type")}>
+                    <Button width="150px" onClick={() => goTo("/register/medico")}>
                         Registrar-se
                     </Button>
                 </RowBox>

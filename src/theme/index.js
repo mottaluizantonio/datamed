@@ -206,11 +206,7 @@ export const FieldBox = styled.div`
         box-sizing: border-box;
         border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
         border: 1.2px solid ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.select))};
-        background-color: ${(prop) => {
-            console.log("prop", prop);
-
-            return prop?.error ? palette.error : colorManager("background", palette.presets.input);
-        }};
+        background-color: ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.input))};
         cursor: pointer;
         option {
             color: ${colorManager("color", palette.presets.option)};
