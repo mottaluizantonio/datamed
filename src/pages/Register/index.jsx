@@ -38,6 +38,7 @@ export const Register = () => {
     } = useForm({ resolver: yupResolver(schema) });
     const { cadastrarUsuario } = useRegister();
     const novoUsuario = async (registros) => {
+        console.log(registros);
         registros.tipo = type;
         let validacao = await cadastrarUsuario(registros);
         if (validacao.status) {
