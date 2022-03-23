@@ -6,11 +6,13 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ModalPaciente } from "../../components/ModalPaciente";
 import { useModal } from "../../providers/Modal";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 export const Dashboard = () => {
+    const [lista, setLista] = useState([]);
     const { id } = useParams();
     const { pacientes, setMedico } = useDashboard();
-    useEffect(() => setMedico(id), []);
+    useEffect(() => setMedico(id), [setMedico, id]);
+    useEffect(() => setLista(pacientes), [pacientes]);
     const { logout, dadosLogado } = useLogin();
     const { Switch } = useModal();
     const history = useHistory();
@@ -53,8 +55,8 @@ export const Dashboard = () => {
                 <RowBox style={{ padding: "20px 0 0 0" }}>
                     <Title>Bem vindo, Dr. (a) {dadosLogado.nome}</Title>
                 </RowBox>
-                <Content>
-                    <Datagrid title="Pacientes" columns={gridColumns} data={pacientes} />
+                <Content overflow="auto">
+                    <Datagrid title="Pacientes" columns={gridColumns} data={lista} />
                 </Content>
             </Container>
             <ModalPaciente />

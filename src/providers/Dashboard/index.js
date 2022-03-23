@@ -1,76 +1,59 @@
-import { useEffect, useState } from 'react';
-import { createContext, useContext } from 'react';
-import { useLogin } from '../Login';
+import { useEffect, useState } from "react";
+import { createContext, useContext } from "react";
+import { Datamed } from "../../services";
+import { useLogin } from "../Login";
+import { useRegister } from "../Register";
+import { useToken } from "../Token";
 const DashboardContext = createContext([]);
 export const DashboardProvider = ({ children }) => {
-	const [pacientes, setPacientes] = useState([]);
-	const { idLogado, setLoged } = useLogin();
-	useEffect(() => getPacientes(idLogado), [idLogado]);
-	const setMedico = (id) => setLoged(id);
-	const getPacientes = (id) => {
-		//pegar os pacientes deste medico na api e colocar no state pacientes, array vazio [] por default
-		//mock abaxo
-		let listaPacientes = [
-			{
-				userId: 1,
-				nome: 'Gabriel',
-				email: 'gabriel@mail.com',
-				data_nascimento: '18/02/1987',
-				cpf: '67656456',
-				profissao: 'Médico',
-				celular: '45496498',
-				status_fumante: 0,
-				tipo: 'medico',
-				crm: '79461325855',
-				id: 1,
-			},
-			{
-				userId: 2,
-				nome: 'Vinicius',
-				email: 'vini@mail.com',
-				data_nascimento: '18/02/1987',
-				cpf: '67656456',
-				profissao: 'Médico',
-				celular: '45496498',
-				status_fumante: 0,
-				tipo: 'paciente',
-				crm: '',
-				id: 2,
-			},
-			{
-				userId: 3,
-				nome: 'Kamila',
-				email: 'kamis@mail.com',
-				data_nascimento: '18/02/1987',
-				cpf: '67656456',
-				profissao: 'Médico',
-				celular: '45496498',
-				status_fumante: 0,
-				tipo: 'medico',
-				crm: '79461325855',
-				id: 3,
-			},
-			{
-				userId: 4,
-				nome: 'Luiz',
-				email: 'luiz@mail.com',
-				data_nascimento: '18/02/1987',
-				cpf: '67656456',
-				profissao: 'Médico',
-				celular: '45496498',
-				status_fumante: 0,
-				tipo: 'paciente',
-				crm: '',
-				id: 4,
-			},
-		];
-		//Mock acima
-		id > 0 && setPacientes(listaPacientes);
-	};
-	return (
-		<DashboardContext.Provider value={{ pacientes, setMedico }}>
-			{children}
-		</DashboardContext.Provider>
-	);
+    const { idLogado, setLoged } = useLogin();
+    const [pacientes, setPacientes] = useState([]);
+    const { token } = useToken();
+    useEffect(() => getPacientes(idLogado), [idLogado]);
+    const setMedico = (id) => setLoged(id);
+    const { cadastrarUsuario } = useRegister();
+    const getPacientes = async (id = idLogado) => {
+        const api = Datamed(token);
+        if (id > 0) {
+            let { data } = await api.get(`/vinculo_medico_paciente?id_medico=${id}`);
+            let dadosUsuarios = await api.get(`/dados_usuarios`);
+            let listaIncludes = [];
+            data.forEach(({ id_paciente }) => {
+                // let paciente = dadosUsuarios.data.find(({ userId }) => userId === id_paciente);
+                // setPacientes([...pacientes, paciente]);
+                listaIncludes.push(id_paciente);
+            });
+            let listaPacientes = dadosUsuarios.data.filter(({ userId }) => listaIncludes.includes(userId));
+            setPacientes([...listaPacientes]);
+        }
+    };
+    const cadastrarPaciente = async (dados) => {
+        let id_medico = Number(idLogado);
+        let id_paciente = 0;
+        let api = Datamed(token);
+        const validacaoCPF = await api.get(`/dados_usuarios?cpf=${dados.cpf}`);
+        if (validacaoCPF.data.length > 0) {
+            id_paciente = validacaoCPF.data[0].userId;
+            const { data } = await api.get(`vinculo_medico_paciente?id_paciente=${id_paciente}&id_medico=${id_medico}`);
+            if (data.length > 0) return { id: 0, status: false, message: "Este paciente já esta cadastrado!" };
+        } else {
+            dados.tipo = "paciente";
+            dados.crm = "";
+            dados.password = dados.cpf + dados.tipo + dados.dados_nascimento;
+            dados.confirmarSenha = dados.password;
+            let retorno = await cadastrarUsuario(dados);
+            if (!!retorno?.status) {
+                id_paciente = retorno.id;
+            } else {
+                return retorno;
+            }
+        }
+
+        api = Datamed(token);
+        let vinculo = { userId: id_medico, id_paciente, id_medico };
+        const { data } = await api.post(`/640/vinculo_medico_paciente`, vinculo).catch(({ response }) => console.log("error", response.data));
+        return !!data?.id ? { id: data.id, status: true, message: "Paciente adicionado com sucesso!" } : { id: 0, status: false, message: "Ops! Algo deu errado" };
+    };
+    return <DashboardContext.Provider value={{ pacientes, setMedico, cadastrarPaciente, getPacientes }}>{children}</DashboardContext.Provider>;
 };
 export const useDashboard = () => useContext(DashboardContext);

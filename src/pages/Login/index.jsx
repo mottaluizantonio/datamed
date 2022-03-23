@@ -22,11 +22,11 @@ export const Login = ({ logar }) => {
                     <FormBox width="300px" onSubmit={handleSubmit(logar)}>
                         <FieldBox>
                             <label>CRM</label>
-                            <input defaultValue="712893" {...register("crm")}></input>
+                            <input defaultValue="22557898" {...register("crm")}></input>
                         </FieldBox>
                         <FieldBox>
                             <label>Senha</label>
-                            <input defaultValue="Aa12345@" {...register("password")} type="password"></input>
+                            <input defaultValue="rafa" {...register("password")} type="password"></input>
                         </FieldBox>
                         <RowBox>
                             <Button fullWidth type="submit">
