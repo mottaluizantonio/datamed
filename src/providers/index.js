@@ -6,17 +6,17 @@ import { RegisterProvider } from "./Register";
 import { TokenProvider } from "./Token";
 
 export const Providers = ({ children }) => {
-  return (
-    <TokenProvider>
-      <LoginProvider>
-        <ModalProvider>
-          <RegisterProvider>
-            <DashboardProvider>
-              <DetailsProvider>{children}</DetailsProvider>
-            </DashboardProvider>
-          </RegisterProvider>
-        </ModalProvider>
-      </LoginProvider>
-    </TokenProvider>
-  );
+    return (
+        <TokenProvider>
+            <LoginProvider>
+                <ModalProvider>
+                    <RegisterProvider>
+                        <DashboardProvider>
+                            <DetailsProvider>{children}</DetailsProvider>
+                        </DashboardProvider>
+                    </RegisterProvider>
+                </ModalProvider>
+            </LoginProvider>
+        </TokenProvider>
+    );
 };

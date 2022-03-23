@@ -6,16 +6,17 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ModalPaciente } from "../../components/ModalPaciente";
 import { useModal } from "../../providers/Modal";
+import { useEffect } from "react";
 export const Dashboard = () => {
+    const { id } = useParams();
     const { pacientes, setMedico } = useDashboard();
+    useEffect(() => setMedico(id), []);
+    const { logout, dadosLogado } = useLogin();
     const { Switch } = useModal();
-    const { logout } = useLogin();
-    const { id = 40 } = useParams();
     const history = useHistory();
     const handleRedirectDetails = (dataPaciente) => {
         history.push(`/details/${dataPaciente.cpf}`);
     };
-    setMedico(id);
     let gridColumns = [
         {
             label: "Nome do Paciente",
@@ -44,11 +45,13 @@ export const Dashboard = () => {
                     <RowBox width="25%">
                         <img src={logo} alt="Datamed" />
                     </RowBox>
-                    <Button onClick={() => Switch("ModalPaciente")}>Adicionar paciente</Button>
-                    <Button onClick={() => logout("/")}>Sair</Button>
+                    <RowBox width="auto">
+                        <Button onClick={() => Switch("ModalPaciente")}>Adicionar paciente</Button>
+                        <Button onClick={() => logout("/")}>Sair</Button>
+                    </RowBox>
                 </Header>
                 <RowBox style={{ padding: "20px 0 0 0" }}>
-                    <Title>Bem vindo, Dr. Strange!</Title>
+                    <Title>Bem vindo, Dr. (a) {dadosLogado.nome}</Title>
                 </RowBox>
                 <Content>
                     <Datagrid title="Pacientes" columns={gridColumns} data={pacientes} />
