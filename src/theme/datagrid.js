@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { palette, colorManager } from "../palette";
+import { palette, colorManager } from "./style";
 export const Grid = styled.section`
     opacity: ${({ style }) => (!!style?.opacity ? style.opacity : "initial")};
     padding: ${({ style }) => (!!style?.padding ? style.padding : "20px 15px")};
@@ -153,22 +153,4 @@ export const LineField = styled.div`
     border-left: 1.2px solid ${colorManager("border", palette.presets.Grid.GridContent.ContentLine.LineField.border)};
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.Grid.GridContent.ContentLine.LineField.background))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "pointer")};
-`;
-export const Title = styled.h1`
-    max-width: 100%;
-    margin: 0px;
-    padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
-    font-weight: ${({ style }) => (!!style?.fontWeight ? style.fontWeight : "bold")};
-    font-size: ${({ style }) => (!!style?.fontSize ? style.fontSize : "40px")};
-    color: ${colorManager("color", palette.presets.font)};
-    cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
-`;
-export const Text = styled.span`
-    max-width: 100%;
-    margin: 0px;
-    padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
-    font-weight: ${({ style }) => (!!style?.fontWeight ? style.fontWeight : "500")};
-    font-size: ${({ style }) => (!!style?.fontSize ? style.fontSize : "15px")};
-    color: ${colorManager("color", palette.presets.Grid.GridContent.ContentLine.LineField.color)};
-    cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
 `;
