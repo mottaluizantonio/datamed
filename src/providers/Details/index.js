@@ -101,7 +101,13 @@ export const DetailsProvider = ({ children }) => {
 
   return (
     <DetailsContext.Provider
-      value={{ Paciente, selectPaciente, diagnosticos, consultas }}
+      value={{
+        Paciente,
+        selectPaciente,
+        diagnosticos,
+        consultas,
+        historicoFamiliar,
+      }}
     >
       {children}
     </DetailsContext.Provider>

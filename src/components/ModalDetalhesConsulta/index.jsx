@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import { useDetails } from "../../providers/Details";
 
 export const ModalDetalhesConsulta = () => {
+
     const { salvarDiagnostico, diagnosticos } = useDetails();
     const { Switch, stateModalDetalhesConsulta } = useModal();
     console.log("entrei", diagnosticos);
