@@ -1,5 +1,5 @@
 import { button, rowBar } from "./style";
-import { Button, ColumnBox, ModalBox, RowBox, Text } from "../../styles/theme";
+import { Button, ColumnBox, ModalBox, RowBox, Text, Input, Select } from "../../theme";
 import { useModal } from "../../providers/Modal";
 export const ModalHistoricoFamiliar = () => {
     const { Switch, stateModalHistoricoFamiliar } = useModal();

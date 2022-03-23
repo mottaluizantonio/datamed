@@ -1,4 +1,4 @@
-import { Button, ColumnBox, Container, RowBox, Text } from "../../styles/theme";
+import { Button, ColumnBox, Container, RowBox, Text } from "../../theme";
 import { container, rightSide, boxLogo } from "./style";
 import logo from "../../img/logo.svg";
 import imgLandingpage from "../../img/imgLandingpage.svg";
@@ -16,7 +16,7 @@ export const Landingpage = () => {
                     <Button width="150px" onClick={() => history.push("/login")}>
                         Login
                     </Button>
-                    <Button width="150px" onClick={() => history.push("/register")}>
+                    <Button width="150px" onClick={() => history.push("/register/:type")}>
                         Registrar-se
                     </Button>
                 </RowBox>

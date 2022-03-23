@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { palette, colorManager } from "./palette";
+import { palette, colorManager } from "./style";
+import { Grid, HeadField, GridHead, GridContent, ContentLine, LineField } from "./datagrid";
 export const Container = styled.section`
     opacity: ${({ style }) => (!!style?.opacity ? style.opacity : "initial")};
     width: 100vw;
@@ -9,12 +10,13 @@ export const Container = styled.section`
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     padding: ${({ style }) => (!!style?.padding ? style.padding : "1% 6%")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "column")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "space-between")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "space-between")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "center")};
     gap: ${({ style }) => (!!style?.gap ? style.gap : "15px")};
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.container))};
     color: ${colorManager("color", palette.presets.font)};
-    overflow: ${({ style }) => (!!style?.overflow ? style.overflow : "none")};
+    overflow: ${(prop) => (!!prop?.overflow ? prop.overflow : !!prop?.style?.overflow ? prop.style.overflow : "none")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "0px")};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "auto")};
     box-sizing: border-box;
@@ -26,12 +28,13 @@ export const Header = styled.section`
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     padding: ${({ style }) => (!!style?.padding ? style.padding : "0px")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "row")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "space-between")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "space-between")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "center")};
     gap: ${({ style }) => (!!style?.gap ? style.gap : "15px")};
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.header))};
     color: ${colorManager("color", palette.presets.font)};
-    overflow: ${({ style }) => (!!style?.overflow ? style.overflow : "none")};
+    overflow: ${(prop) => (!!prop?.overflow ? prop.overflow : !!prop?.style?.overflow ? prop.style.overflow : "none")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "0px")};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "auto")};
     box-sizing: border-box;
@@ -43,12 +46,13 @@ export const Content = styled.section`
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     padding: ${({ style }) => (!!style?.padding ? style.padding : "0px")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "row")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "initial")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "initial")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "center")};
     gap: ${({ style }) => (!!style?.gap ? style.gap : "15px")};
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.content))};
     color: ${colorManager("color", palette.presets.font)};
-    overflow: ${({ style }) => (!!style?.overflow ? style.overflow : "none")};
+    overflow: ${(prop) => (!!prop?.overflow ? prop.overflow : !!prop?.style?.overflow ? prop.style.overflow : "none")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "auto")};
     box-sizing: border-box;
@@ -65,11 +69,12 @@ export const ColumnBox = styled.section`
     height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "auto")};
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "column")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "initial")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "initial")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "initial")};
     gap: ${({ style }) => (!!style?.gap ? style.gap : "15px")};
     box-sizing: border-box;
-    overflow: ${({ style }) => (!!style?.overflow ? style.overflow : "none")};
+    overflow: ${(prop) => (!!prop?.overflow ? prop.overflow : !!prop?.style?.overflow ? prop.style.overflow : "none")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.ColumnBox))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "auto")};
@@ -86,13 +91,14 @@ export const RowBox = styled.div`
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     flex-wrap: ${({ style }) => (!!style?.flexWrap ? style.flexWrap : "nowrap")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "row")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "initial")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "initial")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "initial")};
     padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
     gap: ${({ style }) => (!!style?.gap ? style.gap : "15px")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
     box-sizing: border-box;
-    overflow: ${({ style }) => (!!style?.overflow ? style.overflow : "none")};
+    overflow: ${(prop) => (!!prop?.overflow ? prop.overflow : !!prop?.style?.overflow ? prop.style.overflow : "none")};
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.RowBox))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "auto")};
     img {
@@ -107,11 +113,12 @@ export const FormBox = styled.form`
     height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "auto")};
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "column")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "initial")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "initial")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "center")};
-    gap: ${({ style }) => (!!style?.gap ? style.gap : "25px")};
+    gap: ${({ style }) => (!!style?.gap ? style.gap : "15px")};
     box-sizing: border-box;
-    overflow: ${({ style }) => (!!style?.overflow ? style.overflow : "none")};
+    overflow: ${(prop) => (!!prop?.overflow ? prop.overflow : !!prop?.style?.overflow ? prop.style.overflow : "none")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
     padding: ${({ style }) => (!!style?.padding ? style.padding : "20px")};
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.form))};
@@ -128,6 +135,7 @@ export const FieldBox = styled.div`
     height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "auto")};
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "column")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "center")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "center")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "initial")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
@@ -138,7 +146,7 @@ export const FieldBox = styled.div`
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.FieldBox))};
     label {
         width: 100%;
-        height: 36%;
+        height: auto;
         font-size: 15px;
         display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
         box-sizing: border-box;
@@ -148,7 +156,27 @@ export const FieldBox = styled.div`
     }
     input {
         width: 100%;
-        height: 64%;
+        height: 50px;
+        padding: 16px 10px;
+        font-size: 16px;
+        display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        box-sizing: border-box;
+        color: ${colorManager("color", palette.presets.font)};
+        box-sizing: border-box;
+        border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
+        border: 1.2px solid ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.input))};
+        background-color: ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.input))};
+        ::placeholder {
+            color: ${colorManager("color", palette.presets.placeholder)};
+        }
+        :focus {
+            outline: 1.2px solid ${(prop) => colorManager("focus", palette.presets.focus)};
+        }
+    }
+    textarea {
+        width: 100%;
+        height: 100%;
         padding: 16px 10px;
         font-size: 16px;
         display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
@@ -168,17 +196,21 @@ export const FieldBox = styled.div`
     }
     select {
         width: 100%;
-        height: 64%;
+        height: 50px;
         padding: 0 16px 0 16px;
         font-size: 16px;
         display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
         border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
         box-sizing: border-box;
-        color: ${(prop) => (prop?.error ? palette.error : palette.presets.font)};
+        color: ${colorManager("color", palette.presets.font)};
         box-sizing: border-box;
         border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
         border: 1.2px solid ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.select))};
-        background-color: ${(prop) => (prop?.error ? palette.error : colorManager("background", palette.presets.select))};
+        background-color: ${(prop) => {
+            console.log("prop", prop);
+
+            return prop?.error ? palette.error : colorManager("background", palette.presets.input);
+        }};
         cursor: pointer;
         option {
             color: ${colorManager("color", palette.presets.option)};
@@ -233,7 +265,7 @@ export const Text = styled.span`
     padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
     font-weight: ${({ style }) => (!!style?.fontWeight ? style.fontWeight : "normal")};
     font-size: ${({ style }) => (!!style?.fontSize ? style.fontSize : "18px")};
-    color: ${colorManager("color", palette.presets.font)};
+    color: ${(prop) => (!!prop?.color ? colorManager("color", prop.color) : !!prop?.style?.color ? prop.style.color : colorManager("color", palette.presets.font))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
 `;
 export const ModalBox = styled.section`
@@ -246,6 +278,7 @@ export const ModalBox = styled.section`
     position: ${({ style }) => (!!style?.position ? style.position : "absolute")};
     z-index: ${({ style }) => (!!style?.zIndex ? style.zIndex : 9999)};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "column")};
+    justify-content: ${(prop) => (!!prop?.justifyContent ? prop.justifyContent : !!prop?.style?.justifyContent ? prop.style.justifyContent : "center")};
     justify-content: ${({ style }) => (!!style?.justifyContent ? style.justifyContent : "center")};
     align-items: ${({ style }) => (!!style?.alignItems ? style.alignItems : "center")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
@@ -258,3 +291,85 @@ export const ModalBox = styled.section`
         border-radius: ${({ style }) => (!!style?.img?.borderRadius ? style.img.borderRadius : "12px")};
     }
 `;
+
+export const Input = ({ width = "100%", height = "auto", hidden = false, label, register, name, errorMsg, ...rest }) => {
+    return (
+        <FieldBox width={width} style={{ input: { height } }} hidden={hidden} error={!!errorMsg}>
+            <label>{label}</label>
+            <input {...register(name)} {...rest} />
+            <Text color="error" style={{ padding: "0 10px", fontSize: "15px", fontWeight: 500 }}>
+                {errorMsg}
+            </Text>
+        </FieldBox>
+    );
+};
+export const Select = ({ width = "100%", height = "auto", hidden = false, label, register, name, errorMsg, options, ...rest }) => {
+    return (
+        <FieldBox width={width} style={{ select: { height } }} hidden={hidden} error={!!errorMsg}>
+            <label>{label}</label>
+            <select {...register(name)} {...rest}>
+                {!!options &&
+                    options.map((option, i) => (
+                        <option hidden={!!option?.value ? false : true} key={i} value={!!option?.value ? option.value : ""} defaultValue={!!option?.default ? option?.default : false}>
+                            {!!option?.desc ? option.desc : !!option?.value ? option.value : "Option"}
+                        </option>
+                    ))}
+            </select>
+            <Text color="error" style={{ padding: "0 10px", fontSize: "15px", fontWeight: 400 }}>
+                {errorMsg}
+            </Text>
+        </FieldBox>
+    );
+};
+export const Datagrid = ({ title = "Grid", columns = [], data = [], width = "100%", options = {} }) => {
+    const { showTitle = true, showFilter = true, emptyMsg = "Nada foi encontrado!" } = options;
+    const onClickButton = (callback, iten) => (callback !== undefined ? callback(iten) : console.error("error: missing key 'onclick' in column object"));
+    return (
+        <Grid width={width}>
+            <RowBox style={{ padding: "10px", alignItems: "center", justifyContent: "space-between" }}>
+                <Title hidden={!showTitle} style={{ fontWeight: "bold", fontSize: "40px" }}>
+                    {title}
+                </Title>
+                <FieldBox hidden={!showFilter} width="60%">
+                    <input placeholder="Filtro"></input>
+                </FieldBox>
+            </RowBox>
+            <GridHead>
+                {columns.map(({ key = "", width = 100, label = "Column" }) => (
+                    <HeadField key={`${key}_column`} width={`${width}%`}>
+                        <label>{label}</label>
+                    </HeadField>
+                ))}
+            </GridHead>
+            <GridContent>
+                {data !== undefined && data.length > 0 ? (
+                    data.map((iten, i) => (
+                        <ContentLine key={i} width={`${iten.width}%`}>
+                            {columns.map(({ key = "", width = 100, type = "text", onclick }, i) => {
+                                return type.toLowerCase() === "text" ? (
+                                    <LineField key={`${key}_data-${i}`} width={`${width}%`}>
+                                        <Text color="grey1">{iten[key]}</Text>
+                                    </LineField>
+                                ) : type.toLowerCase() === "button" ? (
+                                    <LineField key={`${key}_button-${i}`} width={`${width}%`}>
+                                        <Button onClick={() => onClickButton(onclick, iten)}>{key}</Button>
+                                    </LineField>
+                                ) : (
+                                    <></>
+                                );
+                            })}
+                        </ContentLine>
+                    ))
+                ) : (
+                    <ContentLine width="100%" height="100%">
+                        <LineField style={{ alignItems: "center" }}>
+                            <Text color="grey1" style={{ fontSize: "2em", fontWeight: "bold" }}>
+                                {emptyMsg}
+                            </Text>
+                        </LineField>
+                    </ContentLine>
+                )}
+            </GridContent>
+        </Grid>
+    );
+};
