@@ -35,21 +35,27 @@ export const DetailsProvider = ({ children }) => {
       ? [
           {
             id: 1,
-            idConsulta: 1,
+            id_consulta: 1,
             tipo: "Doença Cronica",
             descricao: "Dermatite atópica",
+            data_inicio: "24/02/2021",
+            data_fim: "--/--/----"
           },
           {
             id: 2,
             idConsulta: 1,
             tipo: "Medicamento constante",
             descricao: "Hidratante - Nutrel Profuse",
+            data_inicio: "20/01/2022",
+            data_fim: "--/--/----"
           },
           {
             id: 2,
             idConsulta: 2,
-            tipo: "Doença Cronica",
-            descricao: "Ceratocone",
+            tipo: "Tratamento",
+            descricao: "Tratamento cirurgico com anel intra-estromal para ceratocone",
+            data_inicio: "10/01/2022",
+            data_fim: "20/02/2022"
           },
         ]
       : [];
