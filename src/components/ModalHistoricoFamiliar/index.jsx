@@ -13,8 +13,6 @@ export const ModalHistoricoFamiliar = () => {
   const { Switch, stateModalHistoricoFamiliar } = useModal();
   const { historicoFamiliar } = useDetails();
 
-  console.log(historicoFamiliar);
-
   const colunaHistorico = [
     { label: "Grau", key: "grau" },
     { label: "Diagnóstico", key: "doenca" },
