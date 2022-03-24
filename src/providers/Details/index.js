@@ -14,7 +14,9 @@ export const DetailsProvider = ({ children }) => {
 	const [id_consulta, setConsulta] = useState([]);
 	const { token } = useToken();
 	const { idLogado } = useLogin();
+
 	const api = Datamed(token);
+
 	const selectPaciente = async (cpf) => {
 		let result = await api.get(`dados_usuarios?cpf=${cpf}`);
 		!!result?.data && setPaciente(result.data.length > 0 && result.data[0]);
@@ -22,9 +24,12 @@ export const DetailsProvider = ({ children }) => {
 
 	useEffect(() => getDadosPaciente(), [Paciente]);
 
-	const getConsultas = async (id_medico = idLogado) => {
+	const getConsultas = async (
+		id_medico = idLogado,
+		id_paciente = Paciente?.userId
+	) => {
 		let { data: listaConsultas = [] } = await api.get(
-			`consultas?id_medico=${id_medico}`
+			`consultas?id_medico=${id_medico}&id_paciente=${id_paciente}`
 		);
 		setConsultas(listaConsultas);
 	};
@@ -34,7 +39,7 @@ export const DetailsProvider = ({ children }) => {
 			`diagnosticos?id_paciente=${id_paciente}`
 		);
 		setHistorico(listaHistorico);
-        console.log("Historico", historico);
+
 	};
 
 	const getAntecedentes = async (id_paciente = Paciente?.userId) => {
@@ -96,7 +101,6 @@ export const DetailsProvider = ({ children }) => {
 				: 'Ops! Algo deu errado',
 		};
 	};
-
 
 	return (
 		<DetailsContext.Provider

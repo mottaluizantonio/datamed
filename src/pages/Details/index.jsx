@@ -22,6 +22,8 @@ import { ModalDiagnosticos } from '../../components/ModalDiagnosticos';
 import { ModalAntecedentes } from '../../components/ModalAntecedentes';
 
 export const Details = () => {
+    const [Id_consulta, setId_consulta] = useState(0)
+
 	const { cpf } = useParams();
 
 	const { Paciente, selectPaciente, historico, consultas, getDiagnosticos } =
@@ -39,6 +41,7 @@ export const Details = () => {
 	];
 
 	const detalhesConsulta = ({ id }) => {
+        setId_consulta(id)
 		Switch('ModalDiagnosticos');
 		getDiagnosticos(id);
 		// passar o dado.id para o estate que vai pegar os diagnósticos da consulta
@@ -133,7 +136,7 @@ export const Details = () => {
 			</Container>
 			<ModalConsulta></ModalConsulta>
 			<ModalAntecedentes></ModalAntecedentes>
-			<ModalDiagnosticos></ModalDiagnosticos>
+			<ModalDiagnosticos id_consulta={Id_consulta}></ModalDiagnosticos>
 		</>
 	);
 };

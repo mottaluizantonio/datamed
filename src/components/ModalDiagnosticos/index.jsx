@@ -18,8 +18,12 @@ import { toast } from 'react-toastify';
 import { useDetails } from '../../providers/Details';
 
 export const ModalDiagnosticos = ({ id_consulta }) => {
-	const { salvarDiagnostico, diagnosticos, getDiagnosticos, historico } =
-		useDetails();
+	const {
+		salvarDiagnostico,
+		diagnosticos,
+		getDiagnosticos,
+		getDadosPaciente,
+	} = useDetails();
 	const { Switch, stateModalDiagnosticos } = useModal();
 
 	const formSchema = yup.object().shape({
@@ -52,17 +56,17 @@ export const ModalDiagnosticos = ({ id_consulta }) => {
 		{ label: 'Data de Termino', key: 'data_fim' },
 	];
 	const dataAtual = new Date().toISOString().substr(0, 10);
-	const novaDiagnostico = (data) => {
-		let validacao = salvarDiagnostico({ ...data, id_consulta });
+	const novaDiagnostico = async (data) => {
+		let validacao = await salvarDiagnostico({ ...data, id_consulta });
 		if (validacao.status) {
 			reset();
 			toast.success(validacao.message);
-			getDiagnosticos();
+			getDiagnosticos(id_consulta);
+			getDadosPaciente();
 		} else {
 			toast.error(validacao.message);
 			reset();
 		}
-		Switch('ModalDiagnosticos');
 	};
 	return (
 		<ModalBox hidden={stateModalDiagnosticos}>
@@ -116,7 +120,7 @@ export const ModalDiagnosticos = ({ id_consulta }) => {
 						options={{ showHeader: false }}
 						bgColor='grey0'
 						columns={colunas}
-						data={historico}
+						data={diagnosticos}
 					/>
 				</ColumnBox>
 			</ColumnBox>
