@@ -11,7 +11,7 @@ export const LoginProvider = ({ children }) => {
     const [idLogado, setIdLogado] = useState(0);
     const [dadosLogado, setDadosLogado] = useState({});
     const [infoLoged, setInfoLoged] = useState(JSON.parse(localStorage.getItem("@datamed:login")) || {});
-    const setLoged = (id) => setIdLogado(id);
+    const setLoged = (id) => setIdLogado(Number(id));
     let history = useHistory();
     const validarLogin = async ({ crm, password }) => {
         let retorno = { id: 0, status: false, message: "CRM invalido!" };

@@ -49,7 +49,7 @@ export const palette = {
             },
             GridContent: {
                 background: "primary",
-                border: "grey1",
+                border: "primary",
                 ContentLine: {
                     background: "primary",
                     border: "primary",

@@ -317,12 +317,12 @@ export const Select = ({ width = "100%", height = "auto", hidden = false, label,
         </FieldBox>
     );
 };
-export const Datagrid = ({ title = "Grid", columns = [], data = [], width = "100%", options = {} }) => {
-    const { showTitle = true, showFilter = true, emptyMsg = "Nada foi encontrado!" } = options;
+export const Datagrid = ({ title = "Grid", columns = [], data = [], bgColor = "transparent", width = "100%", height = "auto", options = {} }) => {
+    const { showHeader = true, showTitle = true, showFilter = true, emptyMsg = "Nada foi encontrado!" } = options;
     const onClickButton = (callback, iten) => (callback !== undefined ? callback(iten) : console.error("error: missing key 'onclick' in column object"));
     return (
-        <Grid width={width}>
-            <RowBox style={{ padding: "10px", alignItems: "center", justifyContent: "space-between" }}>
+        <Grid width={width} height={height} bgColor={bgColor}>
+            <RowBox hidden={!showHeader} style={{ padding: "10px", alignItems: "center", justifyContent: "space-between" }}>
                 <Title hidden={!showTitle} style={{ fontWeight: "bold", fontSize: "40px" }}>
                     {title}
                 </Title>

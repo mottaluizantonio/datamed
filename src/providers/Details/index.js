@@ -1,117 +1,77 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { Datamed } from "../../services";
+import { useLogin } from "../Login";
+import { useToken } from "../Token";
 
 const DetailsContext = createContext();
 
 export const DetailsProvider = ({ children }) => {
-  const [consultas, setConsultas] = useState([]);
-  const [diagnosticos, setDiagnosticos] = useState([]);
-  const [historicoFamiliar, setHistoricoFamiliar] = useState([]);
-  const [Paciente, setPaciente] = useState("confusao");
-
-  useEffect(() => getDadosPaciente(), [Paciente]);
-
-  const selectPaciente = (cpf = undefined) => {
-    //Mock abaixo
-    let pacienteSelecionado = cpf !== undefined && {
-      userId: 2,
-      nome: "Vinicius",
-      email: "vini@mail.com",
-      data_nascimento: "18/02/1987",
-      cpf: "67656456",
-      profissao: "Médico",
-      celular: "45496498",
-      status_fumante: 0,
-      tipo: "paciente",
-      crm: "",
-      id: 2,
+    const [Paciente, setPaciente] = useState({});
+    const [consultas, setConsultas] = useState([]);
+    const [historico, setHistorico] = useState([]);
+    const [antecedentes, setAntecedentes] = useState([]);
+    const [diagnosticos, setdiagnosticos] = useState([]);
+    const [id_consulta, setConsulta] = useState([]);
+    const { token } = useToken();
+    const { idLogado } = useLogin();
+    const api = Datamed(token);
+    useEffect(() => getDadosPaciente(), [Paciente]);
+    const selectPaciente = async (cpf) => {
+        let result = await api.get(`dados_usuarios?cpf=${cpf}`);
+        !!result?.data && setPaciente(result.data.length > 0 && result.data[0]);
     };
-    //Mock acima
-    setPaciente(pacienteSelecionado);
-  };
+    const getConsultas = async (id_medico = idLogado) => {
+        let { data: listaConsultas = [] } = await api.get(`consultas?id_medico=${id_medico}`);
+        setConsultas(listaConsultas);
+    };
+    const getHistorico = async (id_paciente = Paciente?.userId) => {
+        let { data: listaHistorico = [] } = await api.get(`diagnosticos?id_paciente=${id_paciente}`);
+        setHistorico(listaHistorico);
+    };
+    const getAntecedentes = async (id_paciente = Paciente?.userId) => {
+        let { data: listaAntecedentes = [] } = await api.get(`antecedentes?id_paciente=${id_paciente}`);
+        setAntecedentes(listaAntecedentes);
+    };
+    const getDiagnosticos = async (id) => {
+        setConsulta(id);
+        let { data: listaDiagnosticos = [] } = await api.get(`diagnosticos?id_consulta=${id}`);
+        setdiagnosticos(listaDiagnosticos);
+    };
+    const getDadosPaciente = async () => {
+        getConsultas();
+        getHistorico();
+        // getAntecedentes();
+    };
+    const tratarData = (data) => (data.length > 0 ? `${data.split("-")[2]}/${data.split("-")[1]}/${data.split("-")[0]}` : "--/--/----");
+    const salvarConsulta = async (dados) => {
+        let response = await api.post(`/640/consultas`, { ...dados, userId: idLogado, id_medico: idLogado, id_paciente: Paciente?.userId });
+        return { status: !!response?.data?.id ? true : false, message: !!response?.data?.id ? "Consulta registrada!" : "Ops! Algo deu errado" };
+    };
+    const salvarDiagnostico = async (dados) => {
+        dados.data_inicio = tratarData(dados.data_inicio);
+        dados.data_fim = tratarData(dados.data_fim);
+        let response = await api.post(`/640/diagnosticos`, { ...dados, id_consulta, userId: idLogado, id_medico: idLogado, id_paciente: Paciente?.userId });
+        return { status: !!response?.data?.id ? true : false, message: !!response?.data?.id ? "incluido com sucesso!" : "Ops! Algo deu errado" };
+    };
 
-  const getDadosPaciente = () => {
-    //Mocks abaixo
-    let listaDiagnosticos = !!Paciente?.id
-      ? [
-          {
-            id: 1,
-            id_consulta: 1,
-            tipo: "Doença Cronica",
-            descricao: "Dermatite atópica",
-            data_inicio: "24/02/2021",
-            data_fim: "--/--/----"
-          },
-          {
-            id: 2,
-            idConsulta: 1,
-            tipo: "Medicamento constante",
-            descricao: "Hidratante - Nutrel Profuse",
-            data_inicio: "20/01/2022",
-            data_fim: "--/--/----"
-          },
-          {
-            id: 2,
-            idConsulta: 2,
-            tipo: "Tratamento",
-            descricao: "Tratamento cirurgico com anel intra-estromal para ceratocone",
-            data_inicio: "10/01/2022",
-            data_fim: "20/02/2022"
-          },
-        ]
-      : [];
-    let listaHistoricoFamiliar = !!Paciente?.id
-      ? [
-          {
-            id: 1,
-            idPaciente: 2,
-            grau: "1º",
-            parentesco: "pai",
-            nome: "Francisco Alves Pereira",
-            doenca: "Ceratocone",
-          },
-          {
-            id: 2,
-            idPaciente: 2,
-            grau: "1º",
-            parentesco: "mae",
-            nome: "Elsa Rocha Bento",
-            doenca: "Dermatite atópica",
-          },
-        ]
-      : [];
-    let listaConsultas = !!Paciente?.id
-      ? [
-          {
-            id: 1,
-            crm_medico: "79461325855",
-            desc: "O paciente está com dermatite atópica",
-          },
-          {
-            id: 2,
-            crm_medico: "79461325855",
-            desc: "o pacioente tem ceratocone",
-          },
-        ]
-      : [];
-    //Mocks acima
-    setDiagnosticos(listaDiagnosticos);
-    setHistoricoFamiliar(listaHistoricoFamiliar);
-    setConsultas(listaConsultas);
-  };
-
-  return (
-    <DetailsContext.Provider
-      value={{
-        Paciente,
-        selectPaciente,
-        diagnosticos,
-        consultas,
-        historicoFamiliar,
-      }}
-    >
-      {children}
-    </DetailsContext.Provider>
-  );
+    return (
+        <DetailsContext.Provider
+            value={{
+                Paciente,
+                historico,
+                consultas,
+                antecedentes,
+                diagnosticos,
+                selectPaciente,
+                getDadosPaciente,
+                getDiagnosticos,
+                salvarConsulta,
+                salvarDiagnostico,
+            }}
+        >
+            {children}
+        </DetailsContext.Provider>
+    );
 };
 
 export const useDetails = () => useContext(DetailsContext);
