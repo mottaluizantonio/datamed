@@ -34,6 +34,7 @@ export const DetailsProvider = ({ children }) => {
 			`diagnosticos?id_paciente=${id_paciente}`
 		);
 		setHistorico(listaHistorico);
+        console.log("Historico", historico);
 	};
 
 	const getAntecedentes = async (id_paciente = Paciente?.userId) => {
@@ -95,7 +96,7 @@ export const DetailsProvider = ({ children }) => {
 				: 'Ops! Algo deu errado',
 		};
 	};
-    
+
 
 	return (
 		<DetailsContext.Provider

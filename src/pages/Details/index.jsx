@@ -24,14 +24,8 @@ import { ModalAntecedentes } from '../../components/ModalAntecedentes';
 export const Details = () => {
 	const { cpf } = useParams();
 
-	const {
-		Paciente,
-		selectPaciente,
-		historico,
-		consultas,
-		getDiagnosticos,
-		getDadosPaciente,
-	} = useDetails();
+	const { Paciente, selectPaciente, historico, consultas, getDiagnosticos } =
+		useDetails();
 
 	const { idLogado } = useLogin();
 
@@ -86,8 +80,6 @@ export const Details = () => {
 	useEffect(() => selectPaciente(cpf), []);
 
 	useEffect(() => calculate_age(Paciente), [Paciente]);
-
-	useEffect(() => getDadosPaciente(), [historico]);
 
 	const history = useHistory();
 
