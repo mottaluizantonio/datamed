@@ -20,9 +20,13 @@ import { useLogin } from '../../providers/Login';
 import { useModal } from '../../providers/Modal';
 import { ModalDiagnosticos } from '../../components/ModalDiagnosticos';
 import { ModalAntecedentes } from '../../components/ModalAntecedentes';
+import { useToken } from '../../providers/Token';
 
 export const Details = () => {
     const [Id_consulta, setId_consulta] = useState(0)
+
+    const { goTo } = useToken();
+
 
 	const { cpf } = useParams();
 
@@ -84,9 +88,7 @@ export const Details = () => {
 
 	useEffect(() => calculate_age(Paciente), [Paciente]);
 
-	const history = useHistory();
-
-	const handleVoltar = () => history.push(`/dashboard/${idLogado}`);
+	const handleVoltar = () => goTo(`/dashboard/${idLogado}`);
 
 	return (
 		<>

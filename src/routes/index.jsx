@@ -14,7 +14,8 @@ export const Routes = () => {
     const history = useHistory();
     const logar = async (dados = JSON.parse(localStorage.getItem("@datamed:login")) || {}) => {
         let { id = 0, status, message } = await validarLogin(dados);
-        history.push(id > 0 && status ? `/dashboard/${id}` : firstAccess ? "/" : "/login");
+        let path = JSON.parse(localStorage.getItem("@datamed:path")) || `/dashboard/${id}`;
+        history.push(id > 0 && status ? path : firstAccess ? "/" : "/login");
         if (!!dados?.password) status ? toast.success(message) : toast.error(message);
     };
     useEffect(() => logar(), []);
