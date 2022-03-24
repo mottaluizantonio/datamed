@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useDetails } from "../../providers/Details";
 
 export const ModalDiagnosticos = ({ id_consulta }) => {
-    const { salvarDiagnostico, diagnosticos, getDiagnosticos } = useDetails();
+    const { salvarDiagnostico, diagnosticos, getDadosPaciente } = useDetails();
     const { Switch, stateModalDiagnosticos } = useModal();
 
     const formSchema = yup.object().shape({
@@ -46,11 +46,12 @@ export const ModalDiagnosticos = ({ id_consulta }) => {
         if (validacao.status) {
             reset();
             toast.success(validacao.message);
-            getDiagnosticos();
+            getDadosPaciente()
         } else {
             toast.error(validacao.message);
             reset();
         }
+        Switch("ModalDiagnosticos")
     };
     return (
         <ModalBox hidden={stateModalDiagnosticos}>
