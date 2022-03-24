@@ -1,4 +1,4 @@
-import { rowBar } from "./style";
+import { rowBar, button } from "./style";
 import { Button, ColumnBox, FieldBox, FormBox, ModalBox, RowBox, Text } from "../../theme";
 import { useModal } from "../../providers/Modal";
 import { useForm } from "react-hook-form";
@@ -7,9 +7,8 @@ import * as yup from "yup";
 import { useDetails } from "../../providers/Details";
 import { toast } from "react-toastify";
 export const ModalConsulta = () => {
-    const { salvarConsulta } = useDetails();
+    const { salvarConsulta, getDadosPaciente } = useDetails();
     const { Switch, stateModalConsulta } = useModal();
-
     const formSchema = yup.object().shape({
         desc_consulta: yup.string().required("Digite o diagnostico da consulta."),
     });
@@ -23,12 +22,13 @@ export const ModalConsulta = () => {
         resolver: yupResolver(formSchema),
     });
 
-    const novaConsulta = (data) => {
-        let validacao = salvarConsulta(data);
-        // let validacao = { status: true, message: "Consulta Registrada" };
+    const novaConsulta = async (data) => {
+        let validacao = await salvarConsulta(data);
+        console.log("validacao", validacao);
         if (validacao.status) {
             reset();
             toast.success(validacao.message);
+            getDadosPaciente();
             Switch("ModalConsulta");
         } else {
             toast.error(validacao.message);
@@ -38,27 +38,27 @@ export const ModalConsulta = () => {
 
     return (
         <ModalBox hidden={stateModalConsulta}>
-            <ColumnBox bgColor="grey0" width="80%" height="500px" justifyContent="center">
-                <ColumnBox height="100%" bgColor="primary" style={rowBar}>
-                    <RowBox>
-                        <Text>Registrar Nova Consulta</Text>
-                    </RowBox>
+            <ColumnBox bgColor="primary" width="80%" height="500px" justifyContent="center">
+                <RowBox style={rowBar}>
+                    <Text>Histórico Familiar</Text>
+                    <Button
+                        bgColor="negative"
+                        style={button}
+                        onClick={() => {
+                            reset();
+                            Switch("ModalConsulta");
+                        }}
+                    >
+                        x
+                    </Button>
+                </RowBox>
+                <ColumnBox height="100%" style={rowBar}>
                     <FormBox width="100%" height="100%" onSubmit={handleSubmit(novaConsulta)}>
                         <FieldBox height="100%" error={!!errors?.desc_consulta}>
                             <label>Descrição da Consulta</label>
-                            <textarea
-                                {...register("desc_consulta")}
-                                placeholder={
-                                    !!errors?.desc_consulta
-                                        ? errors.desc_consulta.message
-                                        : "Descreva a consulta!"
-                                }
-                            ></textarea>
+                            <textarea {...register("desc_consulta")} placeholder={!!errors?.desc_consulta ? errors.desc_consulta.message : "Descreva a consulta!"}></textarea>
                         </FieldBox>
                         <RowBox>
-                            <Button width="50%" type="submit">
-                                Registrar Diagnostico
-                            </Button>
                             <Button
                                 bgColor="negative"
                                 onClick={() => {
@@ -69,6 +69,9 @@ export const ModalConsulta = () => {
                                 type="button"
                             >
                                 Cancelar
+                            </Button>
+                            <Button width="50%" type="submit">
+                                Registrar Diagnostico
                             </Button>
                         </RowBox>
                     </FormBox>

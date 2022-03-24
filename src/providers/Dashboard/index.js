@@ -18,11 +18,7 @@ export const DashboardProvider = ({ children }) => {
             let { data } = await api.get(`/vinculo_medico_paciente?id_medico=${id}`);
             let dadosUsuarios = await api.get(`/dados_usuarios`);
             let listaIncludes = [];
-            data.forEach(({ id_paciente }) => {
-                // let paciente = dadosUsuarios.data.find(({ userId }) => userId === id_paciente);
-                // setPacientes([...pacientes, paciente]);
-                listaIncludes.push(id_paciente);
-            });
+            data.forEach(({ id_paciente }) => listaIncludes.push(id_paciente));
             let listaPacientes = dadosUsuarios.data.filter(({ userId }) => listaIncludes.includes(userId));
             setPacientes([...listaPacientes]);
         }
@@ -33,7 +29,7 @@ export const DashboardProvider = ({ children }) => {
         let api = Datamed(token);
         const validacaoCPF = await api.get(`/dados_usuarios?cpf=${dados.cpf}`);
         if (validacaoCPF.data.length > 0) {
-            id_paciente = validacaoCPF.data[0].userId;
+            id_paciente = Number(validacaoCPF.data[0].userId);
             const { data } = await api.get(`vinculo_medico_paciente?id_paciente=${id_paciente}&id_medico=${id_medico}`);
             if (data.length > 0) return { id: 0, status: false, message: "Este paciente já esta cadastrado!" };
         } else {
@@ -43,15 +39,13 @@ export const DashboardProvider = ({ children }) => {
             dados.confirmarSenha = dados.password;
             let retorno = await cadastrarUsuario(dados);
             if (!!retorno?.status) {
-                id_paciente = retorno.id;
+                id_paciente = Number(retorno.id);
             } else {
                 return retorno;
             }
         }
-
         api = Datamed(token);
-        let vinculo = { userId: id_medico, id_paciente, id_medico };
-        const { data } = await api.post(`/640/vinculo_medico_paciente`, vinculo).catch(({ response }) => console.log("error", response.data));
+        const { data } = await api.post(`/640/vinculo_medico_paciente`, { userId: id_medico, id_paciente, id_medico }).catch(({ response }) => console.log("error", response.data));
         return !!data?.id ? { id: data.id, status: true, message: "Paciente adicionado com sucesso!" } : { id: 0, status: false, message: "Ops! Algo deu errado" };
     };
     return <DashboardContext.Provider value={{ pacientes, setMedico, cadastrarPaciente, getPacientes }}>{children}</DashboardContext.Provider>;

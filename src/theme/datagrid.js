@@ -12,8 +12,8 @@ export const Grid = styled.section`
     box-sizing: border-box;
     overflow: ${({ style }) => (!!style?.overflow ? style.overflow : "none")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
-    background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.Grid.background))};
-    border: 1.2px solid ${colorManager("border", palette.presets.Grid.border)};
+    background-color: ${(prop) => (!!prop?.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.Grid.background))};
+    border: 1.2px solid ${(prop) => (!!prop?.bgColor ? colorManager("background", prop.bgColor) : colorManager("border", palette.presets.Grid.border))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "auto")};
     /* gap: ${({ style }) => (!!style?.gap ? style.gap : "2px")}; */
 `;
