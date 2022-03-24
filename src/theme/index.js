@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { palette, colorManager } from "./style";
 import { Grid, HeadField, GridHead, GridContent, ContentLine, LineField } from "./datagrid";
+import ReactInputMask from "react-input-mask";
+
 export const Container = styled.section`
     opacity: ${({ style }) => (!!style?.opacity ? style.opacity : "initial")};
     width: 100vw;
@@ -292,7 +294,7 @@ export const Input = ({ width = "100%", height = "auto", hidden = false, label, 
     return (
         <FieldBox width={width} style={{ input: { height } }} hidden={hidden} error={!!errorMsg}>
             <label>{label}</label>
-            <input {...register(name)} {...rest} />
+            <ReactInputMask {...register(name)} {...rest} />
             <Text color="error" style={{ padding: "0 10px", fontSize: "15px", fontWeight: 500 }}>
                 {errorMsg}
             </Text>
