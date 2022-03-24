@@ -1,5 +1,5 @@
 import { Button, ColumnBox, Container, RowBox, Text } from "../../theme";
-import { container, rightSide, boxLogo, Img } from "./style";
+import { container, rightSide, boxLogo } from "./style";
 import logo from "../../img/logo.svg";
 import imgLandingpage from "../../img/imgLandingpage.svg";
 import { useHistory } from "react-router-dom";
@@ -10,7 +10,6 @@ export const Landingpage = () => {
   const history = useHistory();
   useEffect(() => setFirstAccess(0), []);
   const goTo = (path) => history.push(path);
-
   return (
     <Container style={container}>
       <ColumnBox style={{ gap: "150px" }}>

@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 export const container = {
   padding: "0px 0px 0px 6%",
   flexDirection: "row",
@@ -11,7 +9,3 @@ export const rightSide = {
   alignItems: `flex-end`,
   img: { width: "600px" },
 };
-
-export const Img = styled.img`
-  width: 100px;
-`;

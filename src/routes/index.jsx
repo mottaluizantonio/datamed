@@ -9,7 +9,8 @@ import { useHistory } from "react-router-dom";
 import { useLogin } from "../providers/Login";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
-import Equipe from "../pages/Equipe";
+import { Equipe } from "../pages/Equipe";
+
 export const Routes = () => {
   const { validarLogin, firstAccess } = useLogin();
   const history = useHistory();
