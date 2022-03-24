@@ -17,28 +17,35 @@ import { toast } from "react-toastify";
 import { useDashboard } from "../../providers/Dashboard";
 export const ModalPaciente = () => {
   const { Switch, stateModalPaciente } = useModal();
+
   const { cadastrarPaciente, getPacientes } = useDashboard();
+
   const schema = yup.object().shape({
     nome: yup.string().required("Campo obrigatório"),
     email: yup
       .string()
       .email("Formato de email inválido")
       .required("Campo obrigatório"),
-    cpf: yup.string().required("Campo obrigatório"),
+    cpf: yup
+      .string()
+      .matches(/^[0-9]{11}$/, "Necessário 11 dígitos e apenas números")
+      .required("Campo Obrigatório"),
     data_nascimento: yup.string().required("Campo obrigatório"),
     profissao: yup.string().required("Campo obrigatório"),
     celular: yup
-      .number()
-      .typeError("Precisa ser em número")
+      .string()
+      .matches(/^[1-9]{2}.?[0-9]{9}$/, "Necessário 11 dígitos, ddd+número, ")
       .required("Campo obrigatório"),
     status_fumante: yup.string().required("Campo obrigatório"),
   });
+
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
   const novoPaciente = async (data) => {
     let validacao = await cadastrarPaciente(data);
     if (validacao.status === true) {
@@ -49,11 +56,13 @@ export const ModalPaciente = () => {
       toast.error(validacao.message, { autoClose: 2500 });
     }
   };
+
   const options_fumante = [
     { value: "", desc: "Escolha", default: true },
     { value: "1", desc: "Sim" },
     { value: "0", desc: "Não" },
   ];
+
   return (
     <ModalBox hidden={stateModalPaciente} height="100%">
       <ColumnBox bgColor="grey0" width="400px" height="600px">
@@ -90,7 +99,6 @@ export const ModalPaciente = () => {
               errorMsg={errors?.cpf?.message}
               label="CPF"
               placeholder="CPF do paciente"
-              type="number"
             />
             <Input
               register={register}
