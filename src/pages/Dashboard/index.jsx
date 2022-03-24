@@ -53,7 +53,7 @@ export const Dashboard = () => {
                     </RowBox>
                 </Header>
                 <RowBox style={{ padding: "20px 0 0 0" }}>
-                    <Title>Bem vindo, Dr. (a) {dadosLogado.nome}</Title>
+                    <Title>Bem vindo, Sr(a). {dadosLogado.nome}</Title>
                 </RowBox>
                 <Content overflow="auto">
                     <Datagrid title="Pacientes" columns={gridColumns} data={lista} />
