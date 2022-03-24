@@ -27,7 +27,7 @@ export const LoginProvider = ({ children }) => {
                             user: { id },
                         },
                     }) => {
-                        retorno = { id, status: true, message: `Bem vindo ${nome} !` };
+                        retorno = { id, status: true, message: `Bem-vindo ${nome} !` };
                         setDadosLogado({ ...reponse.data[0] });
                         saveToken(accessToken);
                         setLoged(id);
