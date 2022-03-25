@@ -14,8 +14,7 @@ export const Routes = () => {
     const history = useHistory();
     const logar = async (dados = JSON.parse(localStorage.getItem("@datamed:login")) || {}) => {
         let { id = 0, status, message } = await validarLogin(dados);
-        let path = JSON.parse(localStorage.getItem("@datamed:path")) || `/dashboard/${id}`;
-        console.log("path", path);
+        let path = localStorage.getItem("@datamed:path") || `/dashboard/${id}`;
         history.push(id > 0 && status ? path : firstAccess ? "/" : "/login");
         if (!!dados?.password) status ? toast.success(message) : toast.error(message);
     };

@@ -29,7 +29,7 @@ export const Register = () => {
             .required("Campo Obrigatório"),
         crm: yup
             .string()
-            .matches(/^[0-9]{6}$/, "CRM Invalido!")
+            .matches(/^[0-9]{4,6}$/, "CRM Invalido!")
             .required("Campo Obrigatório"),
         password: yup
             .string()
@@ -76,15 +76,15 @@ export const Register = () => {
                             <Input register={register} name="nome" errorMsg={errors.nome?.message} label="Nome" placeholder="Seu Nome" />
                             <RowBox>
                                 <Input register={register} name="data_nascimento" errorMsg={errors.data_nascimento?.message} label="Nascimento" type="date" />
-                                <Input register={register} name="celular" errorMsg={errors.celular?.message} label="Celular" placeholder="Seu Número" type="tel" mask="(99) 99999.9999" />
+                                <Input register={register} name="celular" errorMsg={errors.celular?.message} label="Celular" placeholder="Seu Número" />
                             </RowBox>
                             <RowBox>
-                                <Input register={register} name="area_atuacao" errorMsg={errors.area_atuacao?.message} label="Área de Atuação" placeholder="Sua área de atuação" type="text" />
+                                <Input register={register} name="area_atuacao" errorMsg={errors.area_atuacao?.message} label="Área de Atuação" placeholder="Sua área de atuação" />
                                 <Select register={register} name="status_fumante" errorMsg={errors.status_fumante?.message} label="Fumante" options={options_fumante} />
                             </RowBox>
                             <RowBox>
-                                <Input register={register} name="cpf" errorMsg={errors.cpf?.message} label="CPF" placeholder="Insira seu CPF" type="number" />
-                                <Input register={register} name="crm" errorMsg={errors.crm?.message} label="CRM" placeholder="Insira seu CRM" type="number" />
+                                <Input register={register} name="cpf" errorMsg={errors.cpf?.message} label="CPF" placeholder="Insira seu CPF" />
+                                <Input register={register} name="crm" errorMsg={errors.crm?.message} label="CRM" placeholder="Insira seu CRM" />
                             </RowBox>
                             <RowBox>
                                 <Input register={register} name="password" errorMsg={errors.password?.message} label="Senha" placeholder="Sua Senha" type="passWord" />
@@ -103,7 +103,7 @@ export const Register = () => {
                 </ColumnBox>
             </ColumnBox>
             <ColumnBox style={rightSide}>
-                <img src={imgLogin} alt="" />
+                <img className="ocultar" src={imgLogin} alt="" />
             </ColumnBox>
         </Container>
     ) : (

@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import { palette, colorManager } from "./style";
 import { Grid, HeadField, GridContent, ContentLine, LineField } from "./datagrid";
+import { keyframes } from "styled-components";
+const animacaoModal = keyframes`
+    from{
+        opacity:0;
+        transform:matrix()
+    }
+    to{
+        opacity:1;
+        transform:matrix()
+    }
+`;
 export const Container = styled.section`
     opacity: ${({ style }) => (!!style?.opacity ? style.opacity : "initial")};
     width: 100vw;
@@ -253,7 +264,7 @@ export const Title = styled.h1`
     padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
     font-weight: ${({ style }) => (!!style?.fontWeight ? style.fontWeight : "bold")};
     font-size: ${({ style }) => (!!style?.fontSize ? style.fontSize : "45px")};
-    color: ${(prop) => (!!prop?.color ? colorManager("color", prop.color) : !!prop?.style?.color ? prop.style.color : colorManager("color", palette.presets.font))};
+    color: ${(prop) => (!!prop?.color ? colorManager("color", prop.color) : !!prop?.style?.color ? prop.style.color : colorManager("color", palette.presets.title))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
 `;
 export const Text = styled.span`
@@ -262,7 +273,7 @@ export const Text = styled.span`
     padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
     font-weight: ${({ style }) => (!!style?.fontWeight ? style.fontWeight : "normal")};
     font-size: ${({ style }) => (!!style?.fontSize ? style.fontSize : "18px")};
-    color: ${(prop) => (!!prop?.color ? colorManager("color", prop.color) : !!prop?.style?.color ? prop.style.color : colorManager("color", palette.presets.font))};
+    color: ${(prop) => (!!prop?.color ? colorManager("color", prop.color) : !!prop?.style?.color ? prop.style.color : colorManager("color", palette.presets.text))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
 `;
 export const ModalBox = styled.section`
@@ -282,6 +293,7 @@ export const ModalBox = styled.section`
     background-color: ${(prop) => (!!prop.bgColor ? colorManager("background", prop.bgColor) : !!prop?.backgroundColor ? prop.backgroundColor : colorManager("background", palette.presets.modal))};
     box-sizing: border-box;
     opacity: ${({ style }) => (!!style?.opacity ? style.opacity : "initial")};
+    animation: ${animacaoModal} 1s;
     img {
         width: ${({ style }) => (!!style?.img?.width ? style.img.width : "100%")};
         height: ${({ style }) => (!!style?.img?.height ? style.img.height : "auto")};

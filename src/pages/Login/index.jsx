@@ -9,7 +9,7 @@ import * as yup from "yup";
 export const Login = ({ logar }) => {
     const history = useHistory();
     const schema = yup.object().shape({
-        crm: yup.string().required("Campo Obrigatório").min(6, "Deve conter 6 dígitos").max(6, "Deve conter 6 dígitos"),
+        crm: yup.string().required("Campo Obrigatório"),
         password: yup.string().required("Campo Obrigatório"),
     });
     const {
@@ -42,7 +42,7 @@ export const Login = ({ logar }) => {
                     </FormBox>
                 </ColumnBox>
                 <ColumnBox style={rightSide}>
-                    <img src={imgLogin} alt="" />
+                    <img className="ocultar" src={imgLogin} alt="" />
                 </ColumnBox>
             </Content>
         </Container>

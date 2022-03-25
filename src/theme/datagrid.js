@@ -62,7 +62,8 @@ export const GridContent = styled.section`
 export const ContentLine = styled.div`
     opacity: ${({ style }) => (!!style?.opacity ? style.opacity : "initial")};
     width: ${(prop) => (!!prop?.width ? prop.width : !!prop?.style?.width ? prop.style.width : "100%")};
-    height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "auto")};
+    min-height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "60px")};
+    height: "auto";
     display: ${(prop) => (!!prop?.hidden ? (!prop.hidden ? "flex" : "none") : "flex")};
     flex-wrap: ${({ style }) => (!!style?.flexWrap ? style.flexWrap : "nowrap")};
     flex-direction: ${({ style }) => (!!style?.flexDirection ? style.flexDirection : "row")};

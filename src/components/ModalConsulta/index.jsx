@@ -24,7 +24,6 @@ export const ModalConsulta = () => {
 
     const novaConsulta = async (data) => {
         let validacao = await salvarConsulta(data);
-        console.log("validacao", validacao);
         if (validacao.status) {
             reset();
             toast.success(validacao.message);
