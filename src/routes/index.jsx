@@ -4,13 +4,12 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { Dashboard } from "../pages/Dashboard";
 import { Details } from "../pages/Details";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useLogin } from "../providers/Login";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { Equipe } from "../pages/Equipe";
-
 export const Routes = () => {
   const { validarLogin, firstAccess } = useLogin();
   const history = useHistory();

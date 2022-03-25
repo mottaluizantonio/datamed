@@ -24,20 +24,18 @@ export const Dashboard = () => {
             label: "Nome do Paciente",
             key: "nome",
             type: "text",
-            width: 100,
         },
         {
             label: "CPF",
             type: "text",
             key: "cpf",
-            width: 100,
         },
         {
             label: "Ação",
             type: "button",
             onclick: handleRedirectDetails,
             key: "Detalhes",
-            width: 100,
+            width: "30%",
         },
     ];
     return (
@@ -53,7 +51,7 @@ export const Dashboard = () => {
                     </RowBox>
                 </Header>
                 <RowBox style={{ padding: "20px 0 0 0" }}>
-                    <Title>Bem vindo, Dr. (a) {dadosLogado.nome}</Title>
+                    <Title style={{textTransform = 'capitalize'}}>Bem-vindo, Sr(a). {dadosLogado.nome}</Title>
                 </RowBox>
                 <Content overflow="auto">
                     <Datagrid title="Pacientes" columns={gridColumns} data={lista} />

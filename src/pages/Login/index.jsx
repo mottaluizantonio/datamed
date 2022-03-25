@@ -1,13 +1,22 @@
 import { useForm } from "react-hook-form";
 import { container, rightSide } from "./style";
 import { useHistory } from "react-router-dom";
-import { Container, FieldBox, Button, FormBox, Content, RowBox, ColumnBox, Title, Text, Header } from "../../theme";
+import { Container, Button, FormBox, Content, RowBox, ColumnBox, Title, Text, Header, Input } from "../../theme";
 import imgLogin from "../../img/imgLogin.svg";
 import logo from "../../img/logo.svg";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 export const Login = ({ logar }) => {
     const history = useHistory();
-    const { register, handleSubmit } = useForm();
+    const schema = yup.object().shape({
+        crm: yup.string().required("Campo Obrigatório").min(6, "Deve conter 6 dígitos").max(6, "Deve conter 6 dígitos"),
+        password: yup.string().required("Campo Obrigatório"),
+    });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({ resolver: yupResolver(schema) });
     return (
         <Container style={container}>
             <Header>
@@ -20,14 +29,8 @@ export const Login = ({ logar }) => {
                         <Text>Bem-vindo de volta!</Text>
                     </ColumnBox>
                     <FormBox width="300px" onSubmit={handleSubmit(logar)}>
-                        <FieldBox>
-                            <label>CRM</label>
-                            <input defaultValue="22557898" {...register("crm")}></input>
-                        </FieldBox>
-                        <FieldBox>
-                            <label>Senha</label>
-                            <input defaultValue="rafa" {...register("password")} type="password"></input>
-                        </FieldBox>
+                        <Input register={register} name="crm" label="CRM" errorMsg={errors?.crm?.message} />
+                        <Input register={register} name="password" label="Senha" errorMsg={errors?.password?.message} type="password" />
                         <RowBox>
                             <Button fullWidth type="submit">
                                 Entrar

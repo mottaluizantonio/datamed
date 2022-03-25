@@ -40,7 +40,7 @@ export const ModalConsulta = () => {
         <ModalBox hidden={stateModalConsulta}>
             <ColumnBox bgColor="primary" width="80%" height="500px" justifyContent="center">
                 <RowBox style={rowBar}>
-                    <Text>Histórico Familiar</Text>
+                    <Text>Nova Consulta</Text>
                     <Button
                         bgColor="negative"
                         style={button}
