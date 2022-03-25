@@ -10,23 +10,13 @@ import { useEffect, useState } from "react";
 import { useToken } from "../../providers/Token";
 export const Dashboard = () => {
     const [lista, setLista] = useState([]);
-
     const { goTo } = useToken();
-
     const { id } = useParams();
-
     const { pacientes, setMedico } = useDashboard();
-
     useEffect(() => setMedico(id), [setMedico, id]);
-
     useEffect(() => setLista(pacientes), [pacientes]);
-
     const { logout, dadosLogado } = useLogin();
-
     const { Switch } = useModal();
-
-
-    
     const handleRedirectDetails = (dataPaciente) => {
        goTo(`/details/${dataPaciente.cpf}`);
     };
@@ -35,20 +25,18 @@ export const Dashboard = () => {
             label: "Nome do Paciente",
             key: "nome",
             type: "text",
-            width: 100,
         },
         {
             label: "CPF",
             type: "text",
             key: "cpf",
-            width: 100,
         },
         {
             label: "Ação",
             type: "button",
             onclick: handleRedirectDetails,
             key: "Detalhes",
-            width: 100,
+            width: "30%",
         },
     ];
     return (

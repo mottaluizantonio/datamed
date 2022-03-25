@@ -119,6 +119,7 @@ export const DetailsProvider = ({ children }) => {
 			{children}
 		</DetailsContext.Provider>
 	);
+
 };
 
 export const useDetails = () => useContext(DetailsContext);
