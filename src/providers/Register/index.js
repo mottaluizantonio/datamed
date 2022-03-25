@@ -4,8 +4,8 @@ const RegisterContext = createContext([]);
 export const RegisterProvider = ({ children }) => {
     const api = Datamed();
     const validacao = async ({ cpf, crm = "" }) => {
-        const { data: validacao_crm } = !!crm.length > 0 && (await api.get(`/dados_usuarios?crm=${crm}`));
-        const { data: validacao_cpf } = !!cpf.length > 0 && (await api.get(`/dados_usuarios?cpf=${cpf}`));
+        const { data: validacao_crm } = !!crm?.length > 0 && (await api.get(`/dados_usuarios?crm=${crm}`));
+        const { data: validacao_cpf } = !!cpf?.length > 0 && (await api.get(`/dados_usuarios?cpf=${cpf}`));
         return {
             id: !!validacao_cpf.length > 0 ? validacao_cpf[0].id : !!validacao_crm.length > 0 ? validacao_crm[0].id : 0,
             status: !!validacao_cpf.length > 0 ? false : !!validacao_crm.length > 0 ? false : true,
