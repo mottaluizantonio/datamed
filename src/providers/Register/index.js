@@ -1,2 +1,0 @@
-const cadastrarUsuario = () => {};
-const cadastrarPaciente = () => {};
