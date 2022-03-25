@@ -40,7 +40,7 @@ export const DetailsProvider = ({ children }) => {
     const getDadosPaciente = async () => {
         getConsultas();
         getHistorico();
-        // getAntecedentes();
+        getAntecedentes();
     };
     const tratarData = (data) => (data.length > 0 ? `${data.split("-")[2]}/${data.split("-")[1]}/${data.split("-")[0]}` : "--/--/----");
     const salvarConsulta = async (dados) => {
