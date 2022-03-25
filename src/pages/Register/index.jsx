@@ -14,13 +14,14 @@ import imgLogin from "../../img/imgLogin.svg";
 import logo from "../../img/logo.svg";
 import { useHistory } from "react-router-dom";
 import { container, rightSide } from "./style";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRegister } from "../../providers/Register";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 export const Register = () => {
   const { type } = useParams();
   const history = useHistory();

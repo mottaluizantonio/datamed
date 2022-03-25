@@ -14,12 +14,13 @@ import { ModalAntecedentes } from "../../components/ModalAntecedentes";
 export const Details = () => {
     const { cpf } = useParams();
     const { Paciente, selectPaciente, historico, consultas, getDiagnosticos } = useDetails();
+    console.log("Paciente", Paciente);
     const { idLogado } = useLogin();
     const [idade, setIdade] = useState(0);
     const { Switch } = useModal();
     const colunasHistorico = [
-        { label: "Tipo", key: "tipo", width: 100 },
-        { label: "Descrição", key: "descricao", width: 100 },
+        { label: "Tipo", key: "tipo", width: "40%" },
+        { label: "Descrição", key: "descricao" },
     ];
     const detalhesConsulta = ({ id }) => {
         Switch("ModalDiagnosticos");

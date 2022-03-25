@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { palette, colorManager } from "./style";
-import { Grid, HeadField, GridHead, GridContent, ContentLine, LineField } from "./datagrid";
+import { Grid, HeadField, GridContent, ContentLine, LineField } from "./datagrid";
+import ReactInputMask from "react-input-mask";
 export const Container = styled.section`
     opacity: ${({ style }) => (!!style?.opacity ? style.opacity : "initial")};
     width: 100vw;
@@ -224,8 +225,9 @@ export const FieldBox = styled.div`
 export const Button = styled.button`
     width: ${(prop) => (!!prop?.width ? prop.width : !!prop?.style?.width ? prop.style.width : !!prop?.fullWidth ? "100%" : "auto")};
     height: ${(prop) => (!!prop?.height ? prop.height : !!prop?.style?.height ? prop.style.height : "48px")};
+    font-size: ${(prop) => (!!prop?.fontSize ? prop.fontSize : !!prop?.style?.fontSize ? prop.style.fontSize : "18px")};
     background-color: ${(prop) => colorManager("background", prop.bgColor || palette.presets.button)};
-    color: ${(prop) => colorManager("color", prop.bgColor || palette.presets.button)};
+    color: ${(prop) => colorManager("color", prop?.color || palette.presets.button)};
     border: 1.2px solid ${(prop) => colorManager("background", prop.bgColor || palette.presets.button)};
     padding: ${(prop) => (!!prop?.style ? (prop.style?.padding ? prop.style.padding : "0px") : "11px 22px")};
     border-radius: ${({ style }) => (!!style?.borderRadius ? style.borderRadius : "12px")};
@@ -252,7 +254,7 @@ export const Title = styled.h1`
     padding: ${({ style }) => (!!style?.padding ? style.padding : 0)};
     font-weight: ${({ style }) => (!!style?.fontWeight ? style.fontWeight : "bold")};
     font-size: ${({ style }) => (!!style?.fontSize ? style.fontSize : "45px")};
-    color: ${colorManager("color", palette.presets.font)};
+    color: ${(prop) => (!!prop?.color ? colorManager("color", prop.color) : !!prop?.style?.color ? prop.style.color : colorManager("color", palette.presets.font))};
     cursor: ${({ style }) => (!!style?.cursor ? style.cursor : "default")};
 `;
 export const Text = styled.span`
@@ -291,8 +293,8 @@ export const ModalBox = styled.section`
 export const Input = ({ width = "100%", height = "auto", hidden = false, label, register, name, errorMsg, ...rest }) => {
     return (
         <FieldBox width={width} style={{ input: { height } }} hidden={hidden} error={!!errorMsg}>
-            <label>{label}</label>
-            <input {...register(name)} {...rest} />
+            <label hidden={!!label}>{label}</label>
+            <ReactInputMask {...register(name)} {...rest} alwaysShowMask />
             <Text color="error" style={{ padding: "0 10px", fontSize: "15px", fontWeight: 500 }}>
                 {errorMsg}
             </Text>
@@ -302,7 +304,7 @@ export const Input = ({ width = "100%", height = "auto", hidden = false, label, 
 export const Select = ({ width = "100%", height = "auto", hidden = false, label, register, name, errorMsg, options, ...rest }) => {
     return (
         <FieldBox width={width} style={{ select: { height } }} hidden={hidden} error={!!errorMsg}>
-            <label>{label}</label>
+            <label hidden={!!label}>{label}</label>
             <select {...register(name)} {...rest}>
                 {!!options &&
                     options.map((option, i) => (
@@ -317,37 +319,37 @@ export const Select = ({ width = "100%", height = "auto", hidden = false, label,
         </FieldBox>
     );
 };
-export const Datagrid = ({ title = "Grid", columns = [], data = [], bgColor = "transparent", width = "100%", height = "auto", options = {} }) => {
+export const Datagrid = ({ title = "Grid", columns = [], data = [], bgColor = "transparent", width = "100%", height = "100%", options = {} }) => {
     const { showHeader = true, showTitle = true, showFilter = true, emptyMsg = "Nada foi encontrado!" } = options;
     const onClickButton = (callback, iten) => (callback !== undefined ? callback(iten) : console.error("error: missing key 'onclick' in column object"));
     return (
-        <Grid width={width} height={height} bgColor={bgColor}>
-            <RowBox hidden={!showHeader} style={{ padding: "10px", alignItems: "center", justifyContent: "space-between" }}>
+        <Grid width={width} height={height} bgColor={bgColor} style={{ gap: "10px" }}>
+            <RowBox hidden={!showHeader} style={{ alignItems: "center", justifyContent: "space-between" }}>
                 <Title hidden={!showTitle} style={{ fontWeight: "bold", fontSize: "40px" }}>
                     {title}
                 </Title>
-                <FieldBox hidden={!showFilter} width="60%">
+                <FieldBox hidden={!showFilter} width="100%">
                     <input placeholder="Filtro"></input>
                 </FieldBox>
             </RowBox>
-            <GridHead>
-                {columns.map(({ key = "", width = 100, label = "Column" }) => (
-                    <HeadField key={`${key}_column`} width={`${width}%`}>
-                        <label>{label}</label>
-                    </HeadField>
-                ))}
-            </GridHead>
             <GridContent>
+                <ContentLine width="100%" height="auto">
+                    {columns.map(({ key = "", width = "100%", label = "Column" }) => (
+                        <HeadField key={`${key}_column`} width={`${width}`}>
+                            |<label>{label}</label>
+                        </HeadField>
+                    ))}
+                </ContentLine>
                 {data !== undefined && data.length > 0 ? (
                     data.map((iten, i) => (
-                        <ContentLine key={i} width={`${iten.width}%`}>
-                            {columns.map(({ key = "", width = 100, type = "text", onclick }, i) => {
+                        <ContentLine key={i} width="auto" height="60px">
+                            {columns.map(({ key = "", width = "100%", type = "text", onclick }, i) => {
                                 return type.toLowerCase() === "text" ? (
-                                    <LineField key={`${key}_data-${i}`} width={`${width}%`}>
+                                    <LineField key={`${key}_data-${i}`} width={`${width}`} height="100%">
                                         <Text color="grey1">{iten[key]}</Text>
                                     </LineField>
                                 ) : type.toLowerCase() === "button" ? (
-                                    <LineField key={`${key}_button-${i}`} width={`${width}%`}>
+                                    <LineField key={`${key}_button-${i}`} width={`${width}`} height="100%">
                                         <Button onClick={() => onClickButton(onclick, iten)}>{key}</Button>
                                     </LineField>
                                 ) : (
@@ -357,9 +359,9 @@ export const Datagrid = ({ title = "Grid", columns = [], data = [], bgColor = "t
                         </ContentLine>
                     ))
                 ) : (
-                    <ContentLine width="100%" height="100%">
-                        <LineField style={{ alignItems: "center" }}>
-                            <Text color="grey1" style={{ fontSize: "2em", fontWeight: "bold" }}>
+                    <ContentLine width="100%" height="60px">
+                        <LineField width="100%" height="100%" style={{ alignItems: "center" }}>
+                            <Text color="grey1" style={{ fontWeight: "bold" }}>
                                 {emptyMsg}
                             </Text>
                         </LineField>

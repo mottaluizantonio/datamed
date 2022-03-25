@@ -14,7 +14,7 @@ export const LoginProvider = ({ children }) => {
     const setLoged = (id) => setIdLogado(Number(id));
     let history = useHistory();
     const validarLogin = async ({ crm, password }) => {
-        let retorno = { id: 0, status: false, message: "CRM invalido!" };
+        let retorno = { id: 0, status: false, message: "CRM não cadastrado!" };
         let reponse = await api.get(`/dados_usuarios?crm=${crm}`);
         if (reponse.data.length > 0) {
             let { email, nome } = reponse.data[0];
@@ -27,7 +27,7 @@ export const LoginProvider = ({ children }) => {
                             user: { id },
                         },
                     }) => {
-                        retorno = { id, status: true, message: `Bem vindo ${nome} !` };
+                        retorno = { id, status: true, message: `Bem-vindo ${nome} !` };
                         setDadosLogado({ ...reponse.data[0] });
                         saveToken(accessToken);
                         setLoged(id);
