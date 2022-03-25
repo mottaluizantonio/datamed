@@ -10,13 +10,14 @@ export const ModalPaciente = () => {
     const { Switch, stateModalPaciente } = useModal();
     const { cadastrarPaciente, getPacientes } = useDashboard();
     const schema = yup.object().shape({
-        nome: yup.string().required("Nome obrigatório"),
-        email: yup.string().email("Formato de email inválido").required("E-mail obrigatório"),
-        cpf: yup.string().required("CPF obrigatório"),
-        data_nascimento: yup.string().required("Data de nascimento obrigatória"),
-        profissao: yup.string().required("Profissão obrigatória"),
-        celular: yup.string().required("Celualar obrigatório"),
-        status_fumante: yup.string().required("Celualar obrigatório"),
+
+        nome: yup.string().required("Campo obrigatório!"),
+        email: yup.string().email("Formato de email inválido").required("Campo obrigatório!"),
+        cpf: yup.string().required("Campo Obrigatório!").min(11, "Deve conter 11 dígitos").max(11, "Deve conter 11 dígitos"),
+        data_nascimento: yup.string().required("Campo obrigatório!"),
+        profissao: yup.string().required("Campo obrigatório!"),
+        celular: yup.string().required("Campo obrigatório!"),
+        status_fumante: yup.string().required("Campo obrigatório!"),
     });
     const {
         reset,

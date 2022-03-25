@@ -24,20 +24,18 @@ export const Dashboard = () => {
             label: "Nome do Paciente",
             key: "nome",
             type: "text",
-            width: 100,
         },
         {
             label: "CPF",
             type: "text",
             key: "cpf",
-            width: 100,
         },
         {
             label: "Ação",
             type: "button",
             onclick: handleRedirectDetails,
             key: "Detalhes",
-            width: 100,
+            width: "30%",
         },
     ];
     return (

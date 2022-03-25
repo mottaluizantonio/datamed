@@ -53,7 +53,6 @@ export const DetailsProvider = ({ children }) => {
         let response = await api.post(`/640/diagnosticos`, { ...dados, id_consulta, userId: idLogado, id_medico: idLogado, id_paciente: Paciente?.userId });
         return { status: !!response?.data?.id ? true : false, message: !!response?.data?.id ? "incluido com sucesso!" : "Ops! Algo deu errado" };
     };
-
     return (
         <DetailsContext.Provider
             value={{
