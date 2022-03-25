@@ -92,7 +92,7 @@ export const Details = () => {
                 </Header>
                 <Content>
                     <ColumnBox height="100%" overflow="auto">
-                        <Datagrid overflow="auto" height="100%" stitle="Histórico" columns={colunasHistorico} data={historico}></Datagrid>
+                        <Datagrid overflow="auto" height="100%" title="Histórico" columns={colunasHistorico} data={historico}></Datagrid>
                     </ColumnBox>
                     <ColumnBox height="100%" overflow="auto">
                         <Datagrid overflow="auto" title="Consultas" columns={colunasConsultas} data={consultas}></Datagrid>

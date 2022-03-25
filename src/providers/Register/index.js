@@ -3,18 +3,19 @@ import { Datamed } from "../../services";
 const RegisterContext = createContext([]);
 export const RegisterProvider = ({ children }) => {
     const api = Datamed();
-    const validacao = async ({ cpf, crm = "" }) => {
-        const { data: validacao_crm } = !!crm.length > 0 && (await api.get(`/dados_usuarios?crm=${crm}`));
-        const { data: validacao_cpf } = !!cpf.length > 0 && (await api.get(`/dados_usuarios?cpf=${cpf}`));
+    const validacao = async ({ cpf = "", crm = "" }) => {
+        const { data: validacao_crm = [] } = !!crm.length > 0 && (await api.get(`/dados_usuarios?crm=${crm}`));
+        const { data: validacao_cpf = [] } = !!cpf.length > 0 && (await api.get(`/dados_usuarios?cpf=${cpf}`));
         return {
-            id: !!validacao_cpf.length > 0 ? validacao_cpf[0].id : !!validacao_crm.length > 0 ? validacao_crm[0].id : 0,
-            status: !!validacao_cpf.length > 0 ? false : !!validacao_crm.length > 0 ? false : true,
-            message: !!validacao_cpf.length > 0 ? "CPF em uso!" : !!validacao_crm.length > 0 ? "CRM em uso!" : "",
+            id: !!validacao_cpf?.length > 0 ? validacao_cpf[0].id : !!validacao_crm?.length > 0 ? validacao_crm[0].id : 0,
+            status: !!validacao_cpf?.length > 0 ? false : !!validacao_crm?.length > 0 ? false : true,
+            message: !!validacao_cpf?.length > 0 ? "CPF em uso!" : !!validacao_crm?.length > 0 ? "CRM em uso!" : "",
         };
     };
     const cadastrarUsuario = async (dados) => {
         const { email, password, tipo = "medico" } = dados;
         let r_validacao = await validacao(dados);
+        console.log("r_validacao", r_validacao);
         if (r_validacao?.status) {
             let retorno = await api.post(`/users`, { email, password }).catch(
                 ({ response: { status } }) =>

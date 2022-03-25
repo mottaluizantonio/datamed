@@ -3,7 +3,6 @@ import { useLogin } from "../../providers/Login";
 import logo from "../../img/logo.svg";
 import { useDashboard } from "../../providers/Dashboard";
 import { useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ModalPaciente } from "../../components/ModalPaciente";
 import { useModal } from "../../providers/Modal";
 import { useEffect, useState } from "react";
@@ -18,7 +17,7 @@ export const Dashboard = () => {
     const { logout, dadosLogado } = useLogin();
     const { Switch } = useModal();
     const handleRedirectDetails = (dataPaciente) => {
-       goTo(`/details/${dataPaciente.cpf}`);
+        goTo(`/details/${dataPaciente.cpf}`);
     };
     let gridColumns = [
         {

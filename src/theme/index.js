@@ -319,7 +319,7 @@ export const Select = ({ width = "100%", height = "auto", hidden = false, label,
     );
 };
 export const Datagrid = ({ title = "Grid", columns = [], data = [], bgColor = "transparent", width = "100%", height = "100%", options = {} }) => {
-    const { showHeader = true, showTitle = true, showFilter = true, emptyMsg = "Nada foi encontrado!" } = options;
+    const { showHeader = true, showTitle = true, showFilter = false, emptyMsg = "Nada foi encontrado!" } = options;
     const onClickButton = (callback, iten) => (callback !== undefined ? callback(iten) : console.error("error: missing key 'onclick' in column object"));
     return (
         <Grid width={width} height={height} bgColor={bgColor} style={{ gap: "10px" }}>
