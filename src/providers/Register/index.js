@@ -14,8 +14,8 @@ export const RegisterProvider = ({ children }) => {
     };
     const cadastrarUsuario = async (dados) => {
         const { email, password, tipo = "medico" } = dados;
-        let r_validacao = validacao(dados);
-        if (r_validacao.status) {
+        let r_validacao = await validacao(dados);
+        if (r_validacao?.status) {
             let retorno = await api.post(`/users`, { email, password }).catch(
                 ({ response: { status } }) =>
                     status === 400 && {
