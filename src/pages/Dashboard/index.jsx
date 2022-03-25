@@ -7,17 +7,18 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ModalPaciente } from "../../components/ModalPaciente";
 import { useModal } from "../../providers/Modal";
 import { useEffect, useState } from "react";
+import { useToken } from "../../providers/Token";
 export const Dashboard = () => {
     const [lista, setLista] = useState([]);
+    const { goTo } = useToken();
     const { id } = useParams();
     const { pacientes, setMedico } = useDashboard();
     useEffect(() => setMedico(id), [setMedico, id]);
     useEffect(() => setLista(pacientes), [pacientes]);
     const { logout, dadosLogado } = useLogin();
     const { Switch } = useModal();
-    const history = useHistory();
     const handleRedirectDetails = (dataPaciente) => {
-        history.push(`/details/${dataPaciente.cpf}`);
+       goTo(`/details/${dataPaciente.cpf}`);
     };
     let gridColumns = [
         {
@@ -51,7 +52,7 @@ export const Dashboard = () => {
                     </RowBox>
                 </Header>
                 <RowBox style={{ padding: "20px 0 0 0" }}>
-                    <Title style={{textTransform = 'capitalize'}}>Bem-vindo, Sr(a). {dadosLogado.nome}</Title>
+                    <Title>Bem vindo, Sr(a). {dadosLogado.nome}</Title>
                 </RowBox>
                 <Content overflow="auto">
                     <Datagrid title="Pacientes" columns={gridColumns} data={lista} />
