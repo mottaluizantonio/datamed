@@ -334,7 +334,7 @@ export const Datagrid = ({ title = "Grid", columns = [], data = [], bgColor = "t
             <GridContent>
                 <ContentLine width="100%" height="auto">
                     {columns.map(({ key = "", width = "100%", label = "Column" }) => (
-                        <HeadField key={`${key}_column`} width={`${width}`}>
+                        <HeadField key={`${key}_column`} width={width}>
                             |<label>{label}</label>
                         </HeadField>
                     ))}
@@ -344,11 +344,11 @@ export const Datagrid = ({ title = "Grid", columns = [], data = [], bgColor = "t
                         <ContentLine key={i} width="auto" height="60px">
                             {columns.map(({ key = "", width = "100%", type = "text", onclick }, i) => {
                                 return type.toLowerCase() === "text" ? (
-                                    <LineField key={`${key}_data-${i}`} width={`${width}`} height="100%">
+                                    <LineField key={`${key}_data-${i}`} width={width} height="100%">
                                         <Text color="grey1">{iten[key]}</Text>
                                     </LineField>
                                 ) : type.toLowerCase() === "button" ? (
-                                    <LineField key={`${key}_button-${i}`} width={`${width}`} height="100%">
+                                    <LineField key={`${key}_button-${i}`} width={width} height="100%">
                                         <Button onClick={() => onClickButton(onclick, iten)}>{key}</Button>
                                     </LineField>
                                 ) : (

@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useLogin } from "../providers/Login";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
 import { Equipe } from "../pages/Equipe";
 export const Routes = () => {
     const { validarLogin, firstAccess } = useLogin();
@@ -16,6 +15,7 @@ export const Routes = () => {
     const logar = async (dados = JSON.parse(localStorage.getItem("@datamed:login")) || {}) => {
         let { id = 0, status, message } = await validarLogin(dados);
         let path = JSON.parse(localStorage.getItem("@datamed:path")) || `/dashboard/${id}`;
+        console.log("path", path);
         history.push(id > 0 && status ? path : firstAccess ? "/" : "/login");
         if (!!dados?.password) status ? toast.success(message) : toast.error(message);
     };
